@@ -5,11 +5,13 @@ import { useCookies } from 'react-cookie'
 
 const AuthModal = ({ setShowModal, isSignUp }) => {
   const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
+  // const [password, setPassword] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState(null)
   const [error, setError] = useState(null)
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const [user, setUser] = useState(null)
+
+  console.log(confirmPassword)
 
   let navigate = useNavigate()
   const onInput = e =>
@@ -24,9 +26,12 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
     e.preventDefault()
 
     try {
-      // if (isSignUp) {
-      //   return
-      // }
+      // isSignUp && user &&
+      if (user.password !== confirmPassword) {
+        console.log('Passwords need to match!')
+        setError('Passwords need to match!')
+        return
+      }
 
       user.isAdmin = false
       // const response = await axios.post(`http://localhost:8000/users`, user)
@@ -44,7 +49,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       if (success && isSignUp) navigate('/onboarding')
       if (success && !isSignUp) navigate('/dashboard')
 
-      window.location.reload()
+      // window.location.reload()
     } catch (error) {
       if (error.response.status === 409) {
         alert(error.response.data)
@@ -119,14 +124,20 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
 
         <label htmlFor='password'>Password</label>
         <input name='password' type='password' onInput={e => onInput(e)} />
-        <label htmlFor='photo'>Photo</label>
-        <input name='photo' type='text' onInput={e => onInput(e)} />
-        <label htmlFor='profession'>Profession</label>
+        <label htmlFor='password'>Confirm Password</label>
+        <input
+          name='confirm password'
+          type='password'
+          onInput={e => setConfirmPassword(e.target.value)}
+        />
+        {/* <label htmlFor='photo'>Photo</label>
+        <input name='photo' type='text' onInput={e => onInput(e)} /> */}
+        {/* <label htmlFor='profession'>Profession</label>
         <input name='profession' type='text' onInput={e => onInput(e)} />
         <label htmlFor='interest'>Interest</label>
         <input name='interest' type='text' onInput={e => onInput(e)} />
         <label htmlFor='about'>About</label>
-        <input name='about' type='text' onInput={e => onInput(e)} />
+        <input name='about' type='text' onInput={e => onInput(e)} /> */}
 
         <button>Submit</button>
       </form>

@@ -49,7 +49,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       if (success && isSignUp) navigate('/onboarding')
       if (success && !isSignUp) navigate('/dashboard')
 
-      window.location.reload()
+      // window.location.reload()
     } catch (error) {
       if (error.response.status === 409) {
         alert(error.response.data)

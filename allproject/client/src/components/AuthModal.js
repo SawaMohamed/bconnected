@@ -19,6 +19,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
     setShowModal(false)
   }
 
+  // create user from frontend
   const handleSubmit = async e => {
     e.preventDefault()
 
@@ -45,7 +46,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
 
       window.location.reload()
     } catch (error) {
-      if (error.response.status===409) {
+      if (error.response.status === 409) {
         alert(error.response.data)
       }
     }

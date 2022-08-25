@@ -24,7 +24,6 @@ const Dashboard = () => {
             console.log(error)
         }
     }
-    
     const getGenderedUsers = async () => {
         try {
             const response = await axios.get('http://localhost:8000/gendered-users', {

@@ -36,10 +36,11 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       user.isAdmin = false
       // const response = await axios.post(`http://localhost:8000/users`, user)
 
-      const response = await axios.post(
-        `http://localhost:8000/${isSignUp ? 'users' : 'login'}`,
-        user
-      )
+      const response = await axios.post(`http://localhost:8000/login`, user)
+      // const response = await axios.post(
+      //   `http://localhost:8000/${isSignUp ? 'users' : 'login'}`,
+      //   user
+      // )
       console.log(response)
 
       setCookie('AuthToken', response.data.token)

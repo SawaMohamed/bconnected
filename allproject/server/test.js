@@ -7,7 +7,8 @@ const cors = require('cors')
 const bcrypt = require('bcrypt')
 require('dotenv').config()
 
-const uri = process.env.URI
+const uri =
+  'mongodb+srv://iebm:test@cluster0.2l8lh62.mongodb.net/?retryWrites=true&w=majority'
 
 const app = express()
 app.use(cors())

@@ -24,7 +24,7 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-    photo: {
+    url: {
       type: String,
     },
     profession: {
@@ -35,6 +35,36 @@ const userSchema = mongoose.Schema(
     },
     about: {
       type: String,
+    },
+    dob_day: {
+      type: Number,
+    },
+    dob_month: {
+      type: Number,
+    },
+    dob_year: {
+      type: Number,
+    },
+    show_dob: {
+      type: Boolean,
+    },
+    gender_identity: {
+      type: String,
+    },
+    show_gender: {
+      type: Boolean,
+    },
+    link_linkedin: {
+      type: String,
+    },
+    link_portfolio: {
+      type: String,
+    },
+    link_github: {
+      type: String,
+    },
+    matches: {
+      type: Array,
     },
   },
   {

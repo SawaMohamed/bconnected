@@ -78,27 +78,53 @@ const getSingleUser = async (req, res) => {
   const singleUser = await User.findById(userId)
   res.json(singleUser)
 }
+
+// @desc  update user from onboarding
 const updateUser = async (req, res) => {
-  const { userId } = req.params
-  const { first_name, last_name, email, password, isAdmin, photo, about } =
-    req.body
-  const updateUser = await User.findByIdAndUpdate(
-    userId,
-    {
-      first_name,
-      last_name,
-      email,
-      password,
-      isAdmin,
-      photo,
+  try {
+    const userId = req.params.userId
+    const user = await User.findById(userId)
+    const {
+      dob_day,
+      dob_month,
+      dob_year,
+      show_dob,
+      gender_identity,
+      show_gender,
+      url,
       about,
-    },
-    //findByIdAndUpdate method takes 3 things Id, Updating that I want to update and option => new = true
-    //when the Client edit something he will got the last edit that he done
-    { new: true }
-  )
-  res.json(updateUser)
+      profession,
+      interest,
+      link_linkedin,
+      link_portfolio,
+      link_github,
+      matches,
+    } = req.body.formData
+
+    if (user) {
+      user.dob_day = dob_day
+      user.dob_month = dob_month
+      user.dob_year = dob_year
+      user.show_dob = show_dob
+      user.show_gender = show_gender
+      user.gender_identity = gender_identity
+      user.url = url
+      user.about = about
+      user.profession = profession
+      user.interest = interest
+      user.link_linkedin = link_linkedin
+      user.link_portfolio = link_portfolio
+      user.link_github = link_github
+      user.matches = matches
+    }
+    const updatedUser = await user.save()
+    res.status(200).json(updatedUser)
+  } catch (error) {
+    console.error(error.message)
+  }
 }
+
+// @desc  delete user from onboarding
 const deleteUser = async (req, res) => {
   const { userId } = req.params
   const deletedUser = await User.findByIdAndDelete(userId)

@@ -17,34 +17,40 @@ const OnBoarding = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const [formData, setFormData] = useState({
     user_id: cookies.UserId,
-    first_name: '',
     dob_day: '',
     dob_month: '',
     dob_year: '',
+    show_dob: false,
+    gender_identity: 'woman',
     show_gender: false,
-    gender_identity: 'man',
-    gender_interest: 'woman',
     url: '',
     about: '',
+    profession: '',
+    interest: 'job',
+    link_linkedin: '',
+    link_portfolio: '',
+    link_github: '',
     matches: [],
   })
 
   let navigate = useNavigate()
 
   const imageListRef = ref(storage, 'images/')
-  const uploadImage = () => {
+
+  // @desc    uploading image to firebase
+  const uploadImage = e => {
+    e.preventDefault()
     if (imageUpload === null) {
       alert('No image was selected!')
       return
     }
-    // todo make sure to don't create duplicate image
+    // todo solve duplicate image
     // if (imageUpload === null) {
     //   alert('No image was selected!')
     //   return
     // }
 
-    //@upload image to firebase in images/
-    // @image will be loaded at the end of Array
+    //@upload image to firebase in images folder
     const imageRef = ref(storage, `images/${imageUpload.name}_${v4()}`)
     uploadBytes(imageRef, imageUpload).then(snapshot => {
       getDownloadURL(snapshot.ref).then(url => {
@@ -59,23 +65,26 @@ const OnBoarding = () => {
     })
   }
 
+  // @desc updating user after first creating
   const handleSubmit = async e => {
-    console.log('submitted')
     e.preventDefault()
     try {
-      const response = await axios.put('http://localhost:8000/user', {
-        formData,
-      })
-      console.log(response)
+      // console.log(formData)
+      const response = await axios.put(
+        `http://localhost:8000/users/${formData && formData.user_id}`,
+        {
+          formData,
+        }
+      )
       const success = response.status === 200
       if (success) navigate('/dashboard')
     } catch (err) {
-      console.log(err)
+      console.log(err.message)
     }
   }
 
   const handleChange = e => {
-    console.log('e', e)
+    console.log(e)
     const value =
       e.target.type === 'checkbox' ? e.target.checked : e.target.value
     const name = e.target.name
@@ -107,17 +116,6 @@ const OnBoarding = () => {
 
         <form onSubmit={handleSubmit}>
           <section>
-            <label htmlFor='first_name'>First Name</label>
-            <input
-              id='first_name'
-              type='text'
-              name='first_name'
-              placeholder='First Name'
-              required={true}
-              value={formData.first_name}
-              onChange={handleChange}
-            />
-
             <label>Birthday</label>
             <div className='multiple-input-container'>
               <input
@@ -151,6 +149,16 @@ const OnBoarding = () => {
               />
             </div>
 
+            <label htmlFor='show-dob'>Show Age on my Profile</label>
+
+            <input
+              id='show-dob'
+              type='checkbox'
+              name='show_dob'
+              onChange={handleChange}
+              checked={formData.show_dob}
+            />
+
             <label>Gender</label>
             <div className='multiple-input-container'>
               <input
@@ -172,14 +180,14 @@ const OnBoarding = () => {
               />
               <label htmlFor='woman-gender-identity'>Woman</label>
               <input
-                id='more-gender-identity'
+                id='other-gender-identity'
                 type='radio'
                 name='gender_identity'
-                value='more'
+                value='other'
                 onChange={handleChange}
-                checked={formData.gender_identity === 'more'}
+                checked={formData.gender_identity === 'other'}
               />
-              <label htmlFor='more-gender-identity'>More</label>
+              <label htmlFor='other-gender-identity'>Other</label>
             </div>
 
             <label htmlFor='show-gender'>Show Gender on my Profile</label>
@@ -191,47 +199,77 @@ const OnBoarding = () => {
               onChange={handleChange}
               checked={formData.show_gender}
             />
-
-            <label>Show Me</label>
-
+            <label>Interest</label>
             <div className='multiple-input-container'>
               <input
-                id='man-gender-interest'
+                id='job'
                 type='radio'
-                name='gender_interest'
-                value='man'
+                name='interest'
+                value='job'
                 onChange={handleChange}
-                checked={formData.gender_interest === 'man'}
+                checked={formData.interest === 'job'}
               />
-              <label htmlFor='man-gender-interest'>Man</label>
+              <label htmlFor='job'>Job</label>
               <input
-                id='woman-gender-interest'
+                id='hiring'
                 type='radio'
-                name='gender_interest'
-                value='woman'
+                name='interest'
+                value='hiring'
                 onChange={handleChange}
-                checked={formData.gender_interest === 'woman'}
+                checked={formData.interest === 'hiring'}
               />
-              <label htmlFor='woman-gender-interest'>Woman</label>
+              <label htmlFor='hiring'>Hiring</label>
               <input
-                id='everyone-gender-interest'
+                id='browsing'
                 type='radio'
-                name='gender_interest'
-                value='everyone'
+                name='interest'
+                value='browsing'
                 onChange={handleChange}
-                checked={formData.gender_interest === 'everyone'}
+                checked={formData.interest === 'browsing'}
               />
-              <label htmlFor='everyone-gender-interest'>Everyone</label>
+              <label htmlFor='browsing'>Browsing</label>
             </div>
 
+            <label htmlFor='profession'>Profession</label>
+            <input
+              id='profession'
+              name='profession'
+              required={true}
+              placeholder='Enter your profession!'
+              value={formData.profession}
+              onChange={handleChange}
+            />
             <label htmlFor='about'>About me</label>
             <input
               id='about'
-              type='text'
               name='about'
               required={true}
-              placeholder='I like long walks...'
+              placeholder='Professional overview!'
               value={formData.about}
+              onChange={handleChange}
+            />
+            <label htmlFor='linkedin'>Linkedin</label>
+            <input
+              id='linkedin'
+              name='link_linkedin'
+              placeholder='Linkedin!'
+              value={formData.link_linkedin}
+              onChange={handleChange}
+            />
+            <label htmlFor='portfolio'>Portfolio</label>
+            <input
+              id='portfolio'
+              name='link_portfolio'
+              placeholder='Portfolio!'
+              value={formData.link_portfolio}
+              onChange={handleChange}
+            />
+            <label htmlFor='github'>Github</label>
+            <input
+              id='github'
+              name='link_github'
+              placeholder='Github!'
+              value={formData.link_github}
               onChange={handleChange}
             />
 
@@ -240,19 +278,13 @@ const OnBoarding = () => {
 
           <section>
             <label htmlFor='url'>Profile Photo</label>
-            {/* <input
-                            type="url"
-                            name="url"
-                            id="url"
-                            onChange={handleChange}
-                            required={true}
-                        /> */}
+
             <input
               type='url'
               name='url'
               id='url'
               onChange={handleChange}
-              required={true}
+              // required={true}
             />
             <input
               type='file'

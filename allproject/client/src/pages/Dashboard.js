@@ -18,7 +18,8 @@ const Dashboard = () => {
             // const response = await axios.get('http://localhost:8000/user', {
             //     params: {userId}
             // })
-            const response = await axios.get('http://localhost:8000/users')
+            const response = await axios.get(`http://localhost:8000/users/${userId}`)
+            // const response = await axios.get(`http://localhost:8000/users/${userId}`)
             setUser(response.data)
         } catch (error) {
             console.log(error)

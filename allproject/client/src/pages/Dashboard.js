@@ -12,16 +12,17 @@ const Dashboard = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
 
   const userId = cookies.UserId
-
+  // @desc      get all users & get current user
   const getUser = async () => {
     try {
       // const response = await axios.get('http://localhost:8000/user', {
       //     params: {userId}
       // })
+      //   setUser(user.data)
 
       const response = await axios.get(`http://localhost:8000/users`)
-
       setUsers(response.data)
+
       const activeUser = await axios.get(
         `http://localhost:8000/users/${userId}`
       )
@@ -35,23 +36,13 @@ const Dashboard = () => {
   const getGenderedUsers = async () => {
     try {
       const response = await axios.get('http://localhost:8000/gendered-users', {
-        params: { gender: user?.gender_interest },
+        params: { gender: user?.interest },
       })
       setGenderedUsers(response.data)
     } catch (error) {
-      //   console.log(error)
+      // console.log(error)
     }
   }
-
-  useEffect(() => {
-    getUser()
-  }, [])
-
-  useEffect(() => {
-    if (user) {
-      getGenderedUsers()
-    }
-  }, [user])
 
   //   const updateMatches = async matchedUserId => {
   //     try {
@@ -64,6 +55,7 @@ const Dashboard = () => {
   //       console.log(err)
   //     }
   //   }
+
   const updateMatches = async matchedUserId => {
     try {
       await axios.put('http://localhost:8000/users', {
@@ -87,11 +79,25 @@ const Dashboard = () => {
     console.log(name + ' left the screen!')
   }
 
-  const matchedUserIds = user?.matches.map(({ _id }) => _id).concat(userId)
+  const matchedUserIds = user?.matches
+    .map(({ user_id }) => user_id)
+    .concat(userId)
 
   const filteredGenderedUsers = genderedUsers?.filter(
-    genderedUser => !matchedUserIds.includes(genderedUser._id)
+    genderedUser => !matchedUserIds.includes(genderedUser.user_id)
   )
+
+  
+  useEffect(() => {
+    getUser()
+  }, [])
+
+  useEffect(() => {
+    if (user) {
+      getGenderedUsers()
+    }
+  }, [user])
+
 
   //   console.log('filteredGenderedUsers ', filteredGenderedUsers)
   return (
@@ -104,8 +110,8 @@ const Dashboard = () => {
               {users?.map(e => (
                 <TinderCard
                   className='swipe'
-                  key={e._id}
-                  onSwipe={dir => swiped(dir, e._id)}
+                  key={e.user_id}
+                  onSwipe={dir => swiped(dir, e.user_id)}
                   onCardLeftScreen={() => outOfFrame(e.first_name)}
                 >
                   <div
@@ -119,8 +125,8 @@ const Dashboard = () => {
               {/* {filteredGenderedUsers?.map(genderedUser => (
                 <TinderCard
                   className='swipe'
-                  key={genderedUser._id}
-                  onSwipe={dir => swiped(dir, genderedUser._id)}
+                  key={genderedUser.user_id}
+                  onSwipe={dir => swiped(dir, genderedUser.user_id)}
                   onCardLeftScreen={() => outOfFrame(genderedUser.first_name)}
                 >
                   <div

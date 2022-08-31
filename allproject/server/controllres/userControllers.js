@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler')
+const { v4: uuidv4 } = require('uuid')
 const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 
@@ -8,12 +9,13 @@ const generateToken = (data, secret) => {
   })
 }
 
+// @desc      check authorization to log in
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body
   const user = await User.findOne({ email })
   if (user && password) {
     const token = generateToken(user, email)
-    res.status(201).json({ token, userId: user._id })
+    res.status(201).json({ token, userId: user.user_id })
   }
 
   res.status(400).json('Invalid Credentials')
@@ -21,44 +23,31 @@ const login = asyncHandler(async (req, res) => {
 
 // @desc    register new user and store token & userId as cookies
 const creatUser = asyncHandler(async (req, res) => {
-  const { first_name, last_name, email, password, isAdmin, photo, about } =
-    req.body
+  const { first_name, last_name, email, password, isAdmin } = req.body
   const userExists = await User.findOne({ email })
   if (userExists) {
     res.status(409).send('User already exists. Please login')
   }
-
-  // The new user that to be saved
-  const user = await User.create({
+  const generatedUserId = uuidv4()
+  await User.create({
+    user_id: generatedUserId,
     first_name,
     last_name,
     email,
     password,
     isAdmin,
-    photo,
-    about,
   })
-
   const sanitizedEmail = email.toLowerCase()
-
   const data = {
-    user_id: user._id,
+    user_id: generatedUserId,
     email: sanitizedEmail,
     password,
   }
   res.status(201).json({
-    userId: user._id,
-    first_name,
-    last_name,
-    email,
-    password,
-    isAdmin,
-    photo,
-    about,
+    userId: generatedUserId,
     token: generateToken(data, sanitizedEmail),
   })
 })
-// Here It should be a group of users not all together we can prass next the next for each group, but I ll do it After
 
 // @desc    get all users no filtering
 const getAllusers = asyncHandler(async (req, res) => {
@@ -69,14 +58,14 @@ const getAllusers = asyncHandler(async (req, res) => {
 // @desc    get the current user according to userId from cookies
 const getSingleUser = asyncHandler(async (req, res) => {
   const { userId } = req.params
-  const singleUser = await User.findById(userId)
+  const singleUser = await User.findOne({ user_id: userId })
   res.json(singleUser)
 })
 
 // @desc  update user from onboarding
 const updateUser = asyncHandler(async (req, res) => {
   const userId = req.params.userId
-  const user = await User.findById(userId)
+  const user = await User.findOne({ user_id: userId })
   const {
     dob_day,
     dob_month,
@@ -118,9 +107,9 @@ const updateUser = asyncHandler(async (req, res) => {
 const updateMatches = asyncHandler(async (req, res) => {
   const { userId, matchedUserId } = req.body
 
-  const query = { _id: userId }
+  const query = { user_id: userId }
   const updateDocument = {
-    $push: { matches: { _id: matchedUserId } },
+    $push: { matches: { user_id: matchedUserId } },
   }
   const user = await User.updateOne(query, updateDocument)
   res.status(200).send(user)

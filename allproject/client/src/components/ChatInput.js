@@ -3,8 +3,8 @@ import axios from 'axios'
 
 const ChatInput = ({ user, clickedUser, getUserMessages, getClickedUsersMessages }) => {
     const [textArea, setTextArea] = useState("")
-    const userId = user?._id
-    const clickedUserId = clickedUser?._id
+    const userId = user?.user_id
+    const clickedUserId = clickedUser?.user_id
 
     const addMessage = async () => {
         const message = {
@@ -15,7 +15,7 @@ const ChatInput = ({ user, clickedUser, getUserMessages, getClickedUsersMessages
         }
 
         try {
-            await axios.post('http://localhost:8000/message', { message })
+            await axios.post('http://localhost:8000/messages', { message })
             getUserMessages()
             getClickedUsersMessages()
             setTextArea("")

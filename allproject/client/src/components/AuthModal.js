@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 const AuthModal = ({ setShowModal, isSignUp }) => {
-  // const [email, setEmail] = useState(null)
-  // const [password, setPassword] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState(null)
   const [error, setError] = useState(null)
   const [cookies, setCookie, removeCookie] = useCookies(null)
@@ -14,27 +12,25 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
 
   let navigate = useNavigate()
 
-  // @handle inputs from form
+  // @desc    handle all inputs form in one function
   const onInput = e =>
     setUser({ ...user, ...{ [e.target.name]: e.target.value } })
 
-  // @x button will remove form
+  // @desc    x button will remove form
   const handleClick = () => {
     setShowModal(false)
   }
 
-  // @signup || login user
+  // @desc    signup || login user
   const handleSubmit = async e => {
     e.preventDefault()
-
     try {
       if (isSignUp && user.password !== confirmPassword) {
         console.log('Passwords need to match!')
         setError('Passwords need to match!')
         return
       }
-
-      // @adding isAdmin default = false for every new user
+      // adding isAdmin default = false for every new user
       user.isAdmin = false
       const response = await axios.post(
         `http://localhost:8000/${isSignUp ? 'users' : 'login'}`,

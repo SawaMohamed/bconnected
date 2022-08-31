@@ -7,8 +7,10 @@ import axios from 'axios'
 const Dashboard = () => {
   const [user, setUser] = useState(null)
   const [users, setUsers] = useState(null)
-  const [genderedUsers, setGenderedUsers] = useState(null)
+  const [usersJobs, setUsersJobs] = useState(null)
   const [lastDirection, setLastDirection] = useState()
+  const [userJobFilter, setUserJobFilter] = useState("hiring")
+  const [professionFilter, setProfessionFilter] = useState(null)
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
 
   const userId = cookies.UserId
@@ -33,29 +35,31 @@ const Dashboard = () => {
     }
   }
 
-  const getGenderedUsers = async () => {
+  // @desc      get users according to your job interest
+  const usersJobInterest = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/gendered-users', {
-        params: { gender: user?.interest },
+      const response = await axios.get('http://localhost:8000/interest-users', {
+        params: { interest: userJobFilter },
       })
-      setGenderedUsers(response.data)
+      setUsersJobs(response.data)
     } catch (error) {
-      // console.log(error)
+      console.log(error)
     }
   }
 
-  //   const updateMatches = async matchedUserId => {
-  //     try {
-  //       await axios.put('http://localhost:8000/addmatch', {
-  //         userId,
-  //         matchedUserId,
-  //       })
-  //       getUser()
-  //     } catch (err) {
-  //       console.log(err)
-  //     }
-  //   }
+  // @desc      get users according to your profession interest
+  const usersProfession = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/profession-users', {
+        params: { profession: professionFilter },
+      })
+      setUsersJobs(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
+// @desc      add matched users to your matches array
   const updateMatches = async matchedUserId => {
     try {
       await axios.put('http://localhost:8000/users', {
@@ -79,12 +83,16 @@ const Dashboard = () => {
     console.log(name + ' left the screen!')
   }
 
+  // @desc      list array of users that i matched including me
   const matchedUserIds = user?.matches
     .map(({ user_id }) => user_id)
     .concat(userId)
+console.log(matchedUserIds)
 
-  const filteredGenderedUsers = genderedUsers?.filter(
-    genderedUser => !matchedUserIds.includes(genderedUser.user_id)
+// @desc        filter matched users out of your interest users
+// @desc        finally use this array to display users
+  const filteredGenderedUsers = usersJobs?.filter(
+    e => !matchedUserIds.includes(e.user_id)
   )
 
   
@@ -94,12 +102,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user) {
-      getGenderedUsers()
+      usersJobInterest()
     }
   }, [user])
 
 
-  //   console.log('filteredGenderedUsers ', filteredGenderedUsers)
   return (
     <>
       {user && (
@@ -107,7 +114,7 @@ const Dashboard = () => {
           <ChatContainer user={user} />
           <div className='swipe-container'>
             <div className='card-container'>
-              {users?.map(e => (
+              {filteredGenderedUsers?.map(e => (
                 <TinderCard
                   className='swipe'
                   key={e.user_id}

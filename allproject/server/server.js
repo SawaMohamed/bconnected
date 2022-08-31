@@ -5,6 +5,7 @@ const userRouter = require('./routes/usersRouter')
 const matchesRouter = require('./routes/matchesRouter')
 const loginRoutes = require('./routes/loginRoutes')
 const messageRouter = require('./routes/messageRoute')
+const interestUsersRouter = require('./routes/interestUsersRoute')
 // const uploadRoutes = require('./routes/uploadRoutes')
 const cors = require('cors')
 
@@ -18,6 +19,7 @@ app.use('/users', userRouter)
 app.use('/matches', matchesRouter)
 app.use('/login', loginRoutes)
 app.use('/messages', messageRouter)
+app.use('/interest-users', interestUsersRouter)
 
 app.listen(8000, () => {
   console.log('Listing on port 8000')

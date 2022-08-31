@@ -32,18 +32,23 @@ const ChatDisplay = ({ user, clickedUser }) => {
   }
 
   useEffect(() => {
-    getUsersMessages()
-    getClickedUsersMessages()
+
+    setInterval(() => {
+        getUsersMessages()
+        getClickedUsersMessages()
+        
+    }, 2000);
   }, [])
 
   const messages = []
+
 
   usersMessages?.forEach(message => {
     const formattedMessage = {}
     formattedMessage['name'] = user?.first_name
     formattedMessage['img'] = user?.url
     formattedMessage['message'] = message.message
-    formattedMessage['timestamp'] = message.timestamp
+    formattedMessage['createdAt'] = message.createdAt
     messages.push(formattedMessage)
   })
 
@@ -52,13 +57,12 @@ const ChatDisplay = ({ user, clickedUser }) => {
     formattedMessage['name'] = clickedUser?.first_name
     formattedMessage['img'] = clickedUser?.url
     formattedMessage['message'] = message.message
-    formattedMessage['timestamp'] = message.timestamp
+    formattedMessage['createdAt'] = message.createdAt
     messages.push(formattedMessage)
   })
 
-  const descendingOrderMessages = messages?.sort((a, b) =>
-    a.timestamp - b.timestamp
-    // a.timestamp.localeCompare(b.timestamp)
+  const descendingOrderMessages =messages?.sort((a, b) =>
+    a.createdAt.localeCompare(b.createdAt)
   )
 
   return (

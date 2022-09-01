@@ -32,16 +32,13 @@ const ChatDisplay = ({ user, clickedUser }) => {
   }
 
   useEffect(() => {
-
     setInterval(() => {
-        getUsersMessages()
-        getClickedUsersMessages()
-        
-    }, 2000);
+      getUsersMessages()
+      getClickedUsersMessages()
+    }, 2000)
   }, [])
 
   const messages = []
-
 
   usersMessages?.forEach(message => {
     const formattedMessage = {}
@@ -61,7 +58,7 @@ const ChatDisplay = ({ user, clickedUser }) => {
     messages.push(formattedMessage)
   })
 
-  const descendingOrderMessages =messages?.sort((a, b) =>
+  const descendingOrderMessages = messages?.sort((a, b) =>
     a.createdAt.localeCompare(b.createdAt)
   )
 

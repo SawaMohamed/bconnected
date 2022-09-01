@@ -24,7 +24,7 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
       console.log(error)
     }
   }
-  
+
   useEffect(() => {
     getMatches()
   }, [])

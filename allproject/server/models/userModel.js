@@ -39,14 +39,8 @@ const userSchema = mongoose.Schema(
     about: {
       type: String,
     },
-    dob_day: {
-      type: Number,
-    },
-    dob_month: {
-      type: Number,
-    },
-    dob_year: {
-      type: Number,
+    dob: {
+      type: String,
     },
     show_dob: {
       type: Boolean,

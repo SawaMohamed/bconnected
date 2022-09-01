@@ -17,12 +17,11 @@ const OnBoarding = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const [formData, setFormData] = useState({
     user_id: cookies.UserId,
-    dob_day: '',
-    dob_month: '',
-    dob_year: '',
-    show_dob: false,
+    dob: '',
+    d: '',
+    show_dob: true,
     gender_identity: 'woman',
-    show_gender: false,
+    show_gender: true,
     url: '',
     about: '',
     profession: '',
@@ -69,9 +68,8 @@ const OnBoarding = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      // console.log(formData)
       const response = await axios.put(
-        `http://localhost:8000/users/${formData && formData.user_id}`,
+        `http://localhost:8000/users/${formData?.user_id}`,
         {
           formData,
         }
@@ -84,9 +82,19 @@ const OnBoarding = () => {
   }
 
   const handleChange = e => {
-    console.log(e)
     const value =
       e.target.type === 'checkbox' ? e.target.checked : e.target.value
+    const name = e.target.name
+
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }))
+  }
+
+  const handleDob = e => {
+    const value = e.target.value
+    console.log(value)
     const name = e.target.name
 
     setFormData(prevState => ({
@@ -107,6 +115,9 @@ const OnBoarding = () => {
     }
   }, [])
 
+  // console.log(formData?.dob);
+  // console.log(Date(formData?.dob));
+
   return (
     <>
       <Nav minimal={true} setShowModal={() => {}} showModal={false} />
@@ -116,41 +127,18 @@ const OnBoarding = () => {
 
         <form onSubmit={handleSubmit}>
           <section>
-            <label>Birthday</label>
-            <div className='multiple-input-container'>
+            <label htmlFor='dob'>Birthday</label>
               <input
-                id='dob_day'
-                type='number'
-                name='dob_day'
-                placeholder='DD'
-                required={true}
-                value={formData.dob_day}
+                id='dob'
+                type='Date'
+                name='dob'
+                value={formData.dob}
+                min='1940-01-01'
+                max='2006-12-31'
                 onChange={handleChange}
               />
-
-              <input
-                id='dob_month'
-                type='number'
-                name='dob_month'
-                placeholder='MM'
-                required={true}
-                value={formData.dob_month}
-                onChange={handleChange}
-              />
-
-              <input
-                id='dob_year'
-                type='number'
-                name='dob_year'
-                placeholder='YYYY'
-                required={true}
-                value={formData.dob_year}
-                onChange={handleChange}
-              />
-            </div>
 
             <label htmlFor='show-dob'>Show Age on my Profile</label>
-
             <input
               id='show-dob'
               type='checkbox'
@@ -199,7 +187,7 @@ const OnBoarding = () => {
               onChange={handleChange}
               checked={formData.show_gender}
             />
-            <label>Interest</label>
+            <label>Your Interest</label>
             <div className='multiple-input-container'>
               <input
                 id='job'
@@ -231,23 +219,34 @@ const OnBoarding = () => {
             </div>
 
             <label htmlFor='profession'>Profession</label>
-            <input
-              id='profession'
-              name='profession'
-              required={true}
-              placeholder='Enter your profession!'
-              value={formData.profession}
-              onChange={handleChange}
-            />
+            <select name='profession' onChange={handleChange}>
+              <option value=''>Your Profession</option>
+              <option value='it'>IT</option>
+              <option value='engineering'>Engineering</option>
+              <option value='marketing_sales'>Marketing & Sales</option>
+              <option value='medicine'>Medicine</option>
+              <option value='architecture_design'>Architecture & Design</option>
+              <option value='sport'>Sport</option>
+              <option value='arts'>Arts</option>
+              <option value='commerce'>Commerce</option>
+              <option value='hospitality'>Hospitality</option>
+              <option value='low'>Low</option>
+              <option value='education'>Education</option>
+              <option value='other'>Other</option>
+            </select>
+
             <label htmlFor='about'>About me</label>
-            <input
+            <textarea
               id='about'
+              type='textarea'
               name='about'
               required={true}
               placeholder='Professional overview!'
               value={formData.about}
               onChange={handleChange}
-            />
+              rows='4'
+              cols='50'
+            ></textarea>
             <label htmlFor='linkedin'>Linkedin</label>
             <input
               id='linkedin'

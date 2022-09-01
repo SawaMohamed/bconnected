@@ -1,6 +1,8 @@
+import {} from 'react-router-dom'
 import TinderCard from 'react-tinder-card'
 import { useEffect, useState } from 'react'
 import ChatContainer from '../components/ChatContainer'
+import NavDashboard from '../components/NavHome'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
@@ -9,9 +11,10 @@ const Dashboard = () => {
   const [users, setUsers] = useState(null)
   const [usersJobs, setUsersJobs] = useState(null)
   const [lastDirection, setLastDirection] = useState()
-  const [userJobFilter, setUserJobFilter] = useState("hiring")
+  const [userJobFilter, setUserJobFilter] = useState('hiring')
   const [professionFilter, setProfessionFilter] = useState(null)
-  const [cookies, setCookie, removeCookie] = useCookies(['user'])
+  const [cookies, setCookie, removeCookie] = useCookies(null)
+  const [favUsers, setFavUsers] = useState([])
 
   const userId = cookies.UserId
   // @desc      get all users & get current user
@@ -39,7 +42,8 @@ const Dashboard = () => {
   const usersJobInterest = async () => {
     try {
       const response = await axios.get('http://localhost:8000/interest-users', {
-        params: { interest: userJobFilter },
+        // params: { interest: user.interest },
+        params: { interest: user.interest, profession: user.profession },
       })
       setUsersJobs(response.data)
     } catch (error) {
@@ -47,19 +51,7 @@ const Dashboard = () => {
     }
   }
 
-  // @desc      get users according to your profession interest
-  const usersProfession = async () => {
-    try {
-      const response = await axios.get('http://localhost:8000/profession-users', {
-        params: { profession: professionFilter },
-      })
-      setUsersJobs(response.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-// @desc      add matched users to your matches array
+  // @desc      add matched users to your matches array
   const updateMatches = async matchedUserId => {
     try {
       await axios.put('http://localhost:8000/users', {
@@ -87,15 +79,25 @@ const Dashboard = () => {
   const matchedUserIds = user?.matches
     .map(({ user_id }) => user_id)
     .concat(userId)
-console.log(matchedUserIds)
 
-// @desc        filter matched users out of your interest users
-// @desc        finally use this array to display users
+  // @desc        filter matched users out of your interest users
+  // @desc        finally use this array to display users
   const filteredGenderedUsers = usersJobs?.filter(
     e => !matchedUserIds.includes(e.user_id)
   )
 
-  
+  const addFav = i => {
+    if (localStorage.getItem('UsersFav')) {
+      let arr = JSON.parse(localStorage.getItem('UsersFav'))
+      arr.push(i)
+      localStorage.setItem('UsersFav', JSON.stringify(arr))
+    } else {
+      let arr = []
+      arr.push(i)
+      localStorage.setItem('UsersFav', JSON.stringify(arr))
+    }
+  }
+
   useEffect(() => {
     getUser()
   }, [])
@@ -106,7 +108,6 @@ console.log(matchedUserIds)
     }
   }, [user])
 
-
   return (
     <>
       {user && (
@@ -114,36 +115,22 @@ console.log(matchedUserIds)
           <ChatContainer user={user} />
           <div className='swipe-container'>
             <div className='card-container'>
-              {filteredGenderedUsers?.map(e => (
+              {filteredGenderedUsers?.map(i => (
                 <TinderCard
                   className='swipe'
-                  key={e.user_id}
-                  onSwipe={dir => swiped(dir, e.user_id)}
-                  onCardLeftScreen={() => outOfFrame(e.first_name)}
+                  key={i.user_id}
+                  onSwipe={dir => swiped(dir, i.user_id)}
+                  onCardLeftScreen={() => outOfFrame(i.first_name)}
                 >
                   <div
-                    style={{ backgroundImage: 'url(' + e.url + ')' }}
+                    style={{ backgroundImage: 'url(' + i.url + ')' }}
                     className='card'
                   >
-                    <h3>{e.first_name}</h3>
+                    <h3>{i.first_name}</h3>
                   </div>
+                  <button className='fav-button' onClick={() => addFav(i)}>Favorites</button>
                 </TinderCard>
               ))}
-              {/* {filteredGenderedUsers?.map(genderedUser => (
-                <TinderCard
-                  className='swipe'
-                  key={genderedUser.user_id}
-                  onSwipe={dir => swiped(dir, genderedUser.user_id)}
-                  onCardLeftScreen={() => outOfFrame(genderedUser.first_name)}
-                >
-                  <div
-                    style={{ backgroundImage: 'url(' + genderedUser.url + ')' }}
-                    className='card'
-                  >
-                    <h3>{genderedUser.first_name}</h3>
-                  </div>
-                </TinderCard>
-              ))} */}
               <div className='swipe-info'>
                 {lastDirection ? <p>You swiped {lastDirection}</p> : <p />}
               </div>

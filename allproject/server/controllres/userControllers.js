@@ -67,9 +67,7 @@ const updateUser = asyncHandler(async (req, res) => {
   const userId = req.params.userId
   const user = await User.findOne({ user_id: userId })
   const {
-    dob_day,
-    dob_month,
-    dob_year,
+    dob,
     show_dob,
     gender_identity,
     show_gender,
@@ -84,9 +82,7 @@ const updateUser = asyncHandler(async (req, res) => {
   } = req.body.formData
 
   if (user) {
-    user.dob_day = dob_day
-    user.dob_month = dob_month
-    user.dob_year = dob_year
+    user.dob = dob
     user.show_dob = show_dob
     user.show_gender = show_gender
     user.gender_identity = gender_identity

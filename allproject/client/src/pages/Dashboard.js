@@ -107,12 +107,13 @@ const Dashboard = () => {
       usersJobInterest()
     }
   }, [user])
+  
 
   return (
     <>
       {user && (
         <div className='dashboard'>
-          <ChatContainer user={user} />
+      {/*  <ChatContainer user={user} /> */}
           <div className='swipe-container'>
             <div className='card-container'>
               {filteredGenderedUsers?.map(i => (

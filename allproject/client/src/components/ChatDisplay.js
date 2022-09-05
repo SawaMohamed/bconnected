@@ -3,6 +3,7 @@ import ChatInput from './ChatInput'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
+
 const ChatDisplay = ({ user, clickedUser }) => {
   const userId = user?.user_id
   const clickedUserId = clickedUser?.user_id
@@ -62,8 +63,10 @@ const ChatDisplay = ({ user, clickedUser }) => {
     a.createdAt.localeCompare(b.createdAt)
   )
 
+  
+
   return (
-    <>
+    <div>
       <Chat descendingOrderMessages={descendingOrderMessages} />
       <ChatInput
         user={user}
@@ -71,7 +74,7 @@ const ChatDisplay = ({ user, clickedUser }) => {
         getUserMessages={getUsersMessages}
         getClickedUsersMessages={getClickedUsersMessages}
       />
-    </>
+    </div>
   )
 }
 

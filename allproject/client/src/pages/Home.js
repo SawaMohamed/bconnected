@@ -2,6 +2,7 @@ import Nav from '../components/Nav'
 import AuthModal from '../components/AuthModal'
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
+import Carousel from '../components/Carousel' 
 
 
 const Home = () => {
@@ -31,9 +32,12 @@ const Home = () => {
         showModal={showModal}
         setIsSignUp={setIsSignUp}
       />
+      <Carousel />
       <div className='home'>
-        <h1 className='primary-title'>Swipe Right®</h1>
-
+      
+       
+       
+        
         <button className='primary-button' onClick={handleClick}>
           {authToken ? 'Signout' : 'Create Account'}
         </button>

@@ -14,6 +14,7 @@ const ChatContainer = () => {
   // @desc      get all users & get current user
   const getUser = async () => {
     try {
+
       const activeUser = await axios.get(
         `http://localhost:8000/users/${userId}`
       );
@@ -30,6 +31,7 @@ const ChatContainer = () => {
       getUser();
     };
   }, []);
+
 
 
   return (

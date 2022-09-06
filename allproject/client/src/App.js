@@ -20,9 +20,12 @@ const App = () => {
                 {authToken && <Route path="/dashboard" element={<Dashboard/>}/>}
                 <Route path="/" element={<Home/>}/>
                 <Route path="/fav" element={<FavUsers />} />
-                {/* <Route path="/chat" element={<FavUsers />} /> */}
-           </Routes>
-        </BrowserRouter>
+
+                {<Route path="/chat" element={<ChatContainer />} />}
+                
+                </Routes>
+                </BrowserRouter>
+
     )
 }
 

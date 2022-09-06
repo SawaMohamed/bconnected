@@ -21,5 +21,9 @@ const App = () => {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/fav" element={<FavUsers />} />
                 {/* <Route path="/chat" element={<FavUsers />} /> */}
+           </Routes>
+        </BrowserRouter>
+    )
+}
 
 export default App;

@@ -4,6 +4,7 @@ const User = require('../models/userModel')
 const getMatches = asyncHandler(async (req, res) => {
   const userIds = JSON.parse(req.query.userIds)
   console.log(req.query.userIds)
+  if (userIds) {
   const pipeline = [
     {
       $match: {
@@ -14,8 +15,10 @@ const getMatches = asyncHandler(async (req, res) => {
     },
   ]
 
+
   const foundUsers = await User.aggregate(pipeline)
   res.status(200).json(foundUsers)
+  }
 })
 
 

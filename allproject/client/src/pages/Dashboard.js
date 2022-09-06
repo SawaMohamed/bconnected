@@ -105,6 +105,7 @@ const Dashboard = () => {
       usersJobInterest()
     }
   }, [user])
+  
 
   useEffect(() => {
     if (user) {
@@ -118,7 +119,7 @@ const Dashboard = () => {
     <>
       {user && (
         <div className='dashboard'>
-          <ChatContainer user={user} />
+      {/*  <ChatContainer user={user} /> */}
           <div className='swipe-container'>
             <div className='card-container'>
               {finalFilteredUsers?.map(i => (

@@ -1,14 +1,14 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { useCookies } from 'react-cookie'
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 const MatchesDisplay = ({ matches, setClickedUser }) => {
-  const [matchedProfiles, setMatchedProfiles] = useState(null)
-  const [cookies, setCookie, removeCookie] = useCookies(null)
+  const [matchedProfiles, setMatchedProfiles] = useState(null);
+  const [cookies, setCookie, removeCookie] = useCookies(null);
 
-  const matchedUserIds = matches.map(({ user_id }) => user_id)
+  const matchedUserIds = matches?.map(({ user_id }) => user_id);
   // const matchedUserIds = matches.map(({ user_id }) => user_id)
-  const userId = cookies.UserId
+  const userId = cookies.UserId;
 
   const getMatches = async () => {
     try {
@@ -17,39 +17,36 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
       })
       setMatchedProfiles(response.data)
     } catch (error) {
-      console.log(error)
+      console.log(error.message);
     }
-  }
+  };
 
   useEffect(() => {
-    getMatches()
-  }, [])
-  useEffect(() => {
-    getMatches()
-  }, [matches])
+    getMatches();
+  }, [matchedUserIds]);
 
   const filteredMatchedProfiles = matchedProfiles?.filter(
-    matchedProfile =>
-      matchedProfile.matches.filter(profile => profile.user_id == userId)
+    (matchedProfile) =>
+      matchedProfile.matches.filter((profile) => profile.user_id == userId)
         .length > 0
-  )
+  );
 
   return (
-    <div className='matches-display'>
+    <div className="matches-display">
       {filteredMatchedProfiles?.map((match, _index) => (
         <div
           key={_index}
-          className='match-card'
+          className="match-card"
           onClick={() => setClickedUser(match)}
         >
-          <div className='img-container'>
-            <img src={match?.url} alt={match?.first_name + ' profile'} />
+          <div className="img-container">
+            <img src={match?.url} alt={match?.first_name + " profile"} />
           </div>
           <h3>{match?.first_name}</h3>
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default MatchesDisplay
+export default MatchesDisplay;

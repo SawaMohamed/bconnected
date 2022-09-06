@@ -59,27 +59,27 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
         ⓧ
       </div>
 
-      <h2>{isSignUp ? 'CREATE ACCOUNT' : 'LOG IN'}</h2>
+      <h2 className="form-title">{isSignUp ? 'CREATE ACCOUNT' : 'LOG IN'}</h2>
       <p>
         By clicking Log In, you agree to our terms. Learn how we process your
         data in our Privacy Policy and Cookie Policy.
       </p>
 
       <form action='submit' onSubmit={e => handleSubmit(e)}>
-        <label htmlFor='First Name'>First Name</label>
+        <label className="form-label" htmlFor='First Name'>First Name</label>
         <input autoFocus name='first_name' type='text' onInput={onInput} />
-        <label htmlFor='Last Name'>Last Name</label>
+        <label className="form-label" htmlFor='Last Name'>Last Name</label>
 
         <input name='last_name' type='text' onInput={onInput} />
-        <label htmlFor='email'>Email</label>
+        <label className="form-label" htmlFor='email'>Email</label>
         <input name='email' type='text' onInput={onInput} />
 
-        <label htmlFor='password'>Password</label>
+        <label className="form-label" htmlFor='password'>Password</label>
         <input name='password' type='password' onInput={onInput} />
 
         {isSignUp && (
           <>
-            <label htmlFor='password'>Confirm Password</label>
+            <label className="form-label" htmlFor='password'>Confirm Password</label>
             <input
               name='confirm password'
               type='password'
@@ -97,11 +97,11 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
         <label htmlFor='about'>About</label>
         <input name='about' type='text' onInput={onInput} /> */}
 
-        <button>Submit</button>
+        <button classname="sumbit-form">Submit</button>
       </form>
 
       <hr />
-      <h2>GET THE APP</h2>
+      
     </div>
   )
 }

@@ -6,11 +6,14 @@ const NavDashboard = () => {
   return (
     <div>
       <nav className='dashboard-nav'>
-        <Link to='/fav'>Favorites</Link>
-        <Link to='/dashboard'>Dashboard</Link>
-        <Link to='/onboarding'>Options</Link>
-        <Link to='/chat'>Chat</Link>
+
+        <Link className="nav-link" style={{textDecoration: 'none'}} to='/onboarding'>Options</Link>
+        <Link className="nav-link" style={{textDecoration: 'none'}} to='/dashboard'>Dashboard</Link>
+        <Link className="nav-link" style={{textDecoration: 'none'}} to='/fav'>Favorites</Link>
+        <Link className="nav-link" style={{textDecoration: 'none'}} to='/chat'>Chat</Link>
+
         <Logout />
+
       </nav>
     </div>
   )

@@ -16,11 +16,10 @@ const Nav = ({ authToken, setShowModal, showModal, setIsSignUp }) => {
         
         <img
           className='logo'
-<<<<<<< HEAD
-          src={minimal ? Logo : Logo}
-=======
-          src={ whiteLogo}
->>>>>>> main
+
+          src={Logo}
+
+
           alt='logo'
         />
       <div className='title'>
@@ -28,13 +27,9 @@ const Nav = ({ authToken, setShowModal, showModal, setIsSignUp }) => {
       <h2 className='second-title'></h2>
       </div>
       </div>
-<<<<<<< HEAD
 
-      
-      {!authToken && !minimal && (
-=======
       {  (!authToken&&
->>>>>>> main
+
         <button
           className='nav-button'
           onClick={handleClick}

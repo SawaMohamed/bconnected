@@ -590,6 +590,7 @@ border-radius: 60px;
     text-align: left;
     z-index: 1;
     transform: translateY(9rem);
+    margin:auto;
 
 }
 

@@ -5,16 +5,13 @@ import { useEffect, useState } from 'react'
 import ChatContainer from '../components/ChatContainer'
 import NavDashboard from '../components/NavHome'
 import { useCookies } from 'react-cookie'
-<<<<<<< HEAD
-import axios from 'axios'
 import HandshakeIcon from '@mui/icons-material/Handshake'
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined'
 import StarIcon from '@mui/icons-material/Star'
 import CloseIcon from '@mui/icons-material/Close'
 import IconButton from '@material-ui/core/IconButton'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-=======
->>>>>>> main
+
 
 
 
@@ -27,13 +24,10 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
   const [professionFilter, setProfessionFilter] = useState(null)
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const [favUsers, setFavUsers] = useState([])
-<<<<<<< HEAD
   const [tinderLayoutHeight, setTinderLayoutHeight] = useState("none")
   const [buttonLayout, setButtonLayout] = useState("flex")
-
-=======
   const [finalFilteredUsers, setFinalFilteredUsers] = useState([])
->>>>>>> main
+
 
   const userId = cookies.UserId
   // @desc      get all users & get current user
@@ -192,7 +186,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
                   >
                     <h3 className="card-title">{i.first_name} {i.last_name}, {i.profession}</h3>
                   </div>
-<<<<<<< HEAD
+
                   
                   <IconButton className="swipeButton-favorite" onClick={() => addFav(i)}><StarIcon fontSize="large" /></IconButton>
                 
@@ -210,11 +204,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
               </div>*/}
                 
                 
-=======
+
                   <button className='fav-button' onClick={() => addFav(i)}>
                     Favorites
                   </button>
->>>>>>> main
+
                 </TinderCard>
               ))}
               

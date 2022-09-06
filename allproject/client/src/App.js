@@ -20,6 +20,11 @@ const App = () => {
                 {authToken && <Route path="/dashboard" element={<Dashboard/>}/>}
                 <Route path="/" element={<Home/>}/>
                 <Route path="/fav" element={<FavUsers />} />
-                {/* <Route path="/chat" element={<FavUsers />} /> */}
+                {<Route path="/chat" element={<ChatContainer />} />}
+                
+                </Routes>
+                </BrowserRouter>
+    )
+}
 
 export default App;

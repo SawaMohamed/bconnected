@@ -13,13 +13,7 @@ const ChatContainer = () => {
   // @desc      get all users & get current user
   const getUser = async () => {
     try {
-      // const response = await axios.get('http://localhost:8000/user', {
-      //     params: {userId}
-      // })
-      //   setUser(user.data)
-
-      // const response = await axios.get(`http://localhost:8000/users`)
-      // setUsers(response.data)
+      
 
       const activeUser = await axios.get(
         `http://localhost:8000/users/${userId}`
@@ -38,8 +32,7 @@ const ChatContainer = () => {
     };
   }, []);
 
-const ChatContainer = ({ user }) => {
-  const [clickedUser, setClickedUser] = useState()
+
 
   return (
     <div className="chat-container">

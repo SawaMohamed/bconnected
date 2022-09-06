@@ -1,16 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700;800&display=swap");
 
-html, body {
-    margin: 0;
-    padding: 0;
-    text-align: center;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
+
+
 * {
-    font-family: 'Readex Pro', sans-serif;
+  font-family: "Readex Pro", sans-serif;
 }
 
 .primary-title {
+
     font-size: 50px;
     color: rgb(236, 163, 29);
     
@@ -42,36 +46,39 @@ html, body {
 .primary-button:hover {
     background: linear-gradient(105deg, rgb(237, 190, 95), rgb(229, 133, 54));
     cursor: pointer;
+ 
 }
 
 .secondary-button {
-    color: rgb(121, 119, 119);
-    background-color: rgb(255, 255, 255);
-    font-weight: 500;
-    font-size: 15px;
-    text-transform: uppercase;
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: solid 2px rgb(121, 119, 119);
-    margin: 6px;
+  color: rgb(121, 119, 119);
+  background-color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: solid 2px rgb(121, 119, 119);
+  margin: 6px;
 }
 
 .secondary-button:hover {
+
     color: rgb(48, 48, 48);
     border: solid 2px rgb(48, 48, 48);
     cursor: pointer;
+ 
 }
-
 
 /*-------- Navbar --------*/
 
 nav {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 nav .nav-button {
+
     color: rgb(255,255,255);
     background: linear-gradient(55deg, rgb(229, 133, 54), rgb(239, 205, 82));
     font-size: 15px;
@@ -144,11 +151,12 @@ nav .logo-container .logo {
     text-decoration: underline;
     background: rgba(242, 223, 190, 0.3);
     border-radius: 20px;
-}
 
+}
 
 /*-------- Home page --------*/
 .overlay {
+
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -159,11 +167,13 @@ nav .logo-container .logo {
     );
     
     overflow: scroll;
+
 }
 
 .home {
-    margin-top: 30vh;
+  margin-top: 30vh;
 }
+
 
 
 
@@ -230,10 +240,12 @@ h1, p {
     place-items: center;
     color: rgba(5, 5, 5, 0.338);
     cursor: pointer;
+
 }
 
 /*-------- Auth Modal --------*/
 .auth-modal {
+
     position: absolute;
     left: 0;
     right: 0;
@@ -256,10 +268,11 @@ h1, p {
 .auth-modal .form-label{
     color: rgb(196, 118, 8);
     padding: 5px;
+
 }
 
 .auth-modal .close-icon {
-    float: right;
+  float: right;
 }
 
 .auth-modal .close-icon:hover{
@@ -269,6 +282,7 @@ border-radius: 60px;
 }
 
 .auth-modal form {
+
     display: flex;
     flex-direction: column;
     
@@ -295,25 +309,28 @@ border-radius: 60px;
 .auth-modal button:hover{
     background: rgb(222, 146, 3);
     cursor: pointer;
+
 }
 
 /*-------- OnBoarding Page --------*/
 .onboarding {
+
     border-top: solid 1px rgb(213, 213, 213);
     transform: translateY(-16rem);
+
 }
 
 .onboarding form {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .onboarding form section {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    width: 35%;
-    text-align: start;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 35%;
+  text-align: start;
 }
 
 .onboarding .form-title{
@@ -321,47 +338,48 @@ border-radius: 60px;
 }
 
 .onboarding form input {
-    padding: 15px 30px;
-    margin: 10px 0;
-    font-size: 15px;
-    border: solid 2px rgb(219, 219, 219);
-    border-radius: 10px;
+  padding: 15px 30px;
+  margin: 10px 0;
+  font-size: 15px;
+  border: solid 2px rgb(219, 219, 219);
+  border-radius: 10px;
 }
 
 .onboarding form label {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .onboarding form .multiple-input-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .onboarding form input::-webkit-outer-spin-button,
 .onboarding form input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .onboarding form .multiple-input-container input {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .onboarding form .multiple-input-container label {
-    padding: 10px;
-    border: solid 2px rgb(144, 144, 144);
-    border-radius: 10px;
-    transition: all 0.3s;
-    margin-right: 10px;
+  padding: 10px;
+  border: solid 2px rgb(144, 144, 144);
+  border-radius: 10px;
+  transition: all 0.3s;
+  margin-right: 10px;
 }
 
-.onboarding form input[type=radio] {
-    display: none;
+.onboarding form input[type="radio"] {
+  display: none;
 }
 
-.onboarding form input[type=number] {
-    width: 10%;
+.onboarding form input[type="number"] {
+  width: 10%;
 }
+
 
 .onboarding form input[type=radio]:checked + label {
     border: solid 2px rgb(236, 166, 46);
@@ -379,10 +397,11 @@ border-radius: 60px;
 .onboarding .submit-button{
     color: white;
     background: rgb(236, 166, 46);
+
 }
 
 .onboarding form .photo-container img {
-    width: 100%
+  width: 100%;
 }
 
 .onboarding .profession-select{
@@ -413,6 +432,7 @@ border-radius: 60px;
 
 /*-------- Dashboard  --------*/
 .dashboard {
+
     display: flex;
     justify-content: space-between;
     
@@ -426,26 +446,28 @@ border-radius: 60px;
     align-items: center;
     height: 100vh;
     transform: translateY(8rem);
+
 }
 
 .swipe {
-    position: absolute;
+  position: absolute;
 }
 
 .dashboard .card-container {
-    width: 400px;
-    height: 650px;
+  width: 400px;
+  height: 650px;
 }
 
 .card {
-    width: 400px;
-    height: 650px;
-    border-radius: 30px;
-    background-size: cover;
-    background-position: center;
+  width: 400px;
+  height: 650px;
+  border-radius: 30px;
+  background-size: cover;
+  background-position: center;
 }
 
 .card h3 {
+
     margin-top: 10px;
     color: white;
     background: rgb(144, 144, 144,0.75);
@@ -464,10 +486,11 @@ border-radius: 60px;
     padding: 10px;
     transform: translateY(12rem);
     color: rgb(222, 146, 3);
+
 }
 
-.fav-button{
-    transform: translateY(-2rem);
+.fav-button {
+  transform: translateY(-2rem);
 }
 
 .tinder-layout{
@@ -559,73 +582,97 @@ border-radius: 60px;
 
 /*-------- Chat Container --------*/
 .chat-container {
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
     width: 30%;
     text-align: left;
     z-index: 1;
     transform: translateY(9rem);
+
 }
 
 .chat-container .chat-container-header {
-    background: linear-gradient(45deg, rgb(254, 48, 114), rgb(255, 89, 64));
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background: linear-gradient(
+    45deg,
+    rgba(241, 156, 11, 0.921),
+    rgba(246, 181, 51, 0.789)
+  );
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .chat-container .option {
-    border: none;
-    background-color: rgb(255, 255, 255);
-    border-bottom: solid 4px rgb(243, 33, 33);
-    font-size: 20px;
-    margin: 2px;
-    padding: 10px;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  border-bottom: solid 4px rgba(241, 156, 11, 0.921);
+  font-size: 20px;
+  margin: 2px;
+  padding: 10px;
 }
 
 .chat-container .option:disabled {
-    border-bottom: solid 4px rgb(187, 187, 187);
+  border-bottom: solid 4px rgb(187, 187, 187);
 }
 
 .chat-container .profile,
 .chat-container .log-out-icon {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: rgb(255, 255, 255);
 }
 
 .img-container {
-    height: 30px;
-    width: 30px;
-    border-radius: 15px;
-    overflow: hidden;
-    margin: 10px;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 10px;
 }
 
 .img-container img {
-    width: 100%;
+  width: 100%;
 }
 
 /*-------- Chat Display --------*/
 .chat-display,
 .matches-display {
-    padding: 20px;
-    height: 60vh;
-    overflow-y: auto;
+  padding: 20px;
+  height: 65vh;
+  overflow-y: auto;
+}
+
+.message-box{
+  background: linear-gradient(
+    45deg,
+    rgba(241, 156, 11, 0.921),
+    rgba(246, 181, 51, 0.789)
+  );
+padding: 8px 10px;
+border-radius: 4px;
+max-width: 30%;
+margin: 0 50% 0 0;
+color: #f7f3f3;
+font-size: 14px;
 }
 
 /*-------- Chat Input --------*/
 .chat-input {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+  margin-left: 15%;
+  width: 70%;
 }
 
 /*-------- Fav Users --------*/
-.fav-container{
-    display: flex;
-    flex-flow: row wrap;
+.fav-container {
+  display: flex;
+  flex-flow: row wrap;
 }

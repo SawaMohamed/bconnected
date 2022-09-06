@@ -4,16 +4,19 @@ import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import Carousel from '../components/Carousel' 
 
+
 const Home = () => {
   const [showModal, setShowModal] = useState(false)
   const [isSignUp, setIsSignUp] = useState(true)
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
+  
   const authToken = cookies.AuthToken
 
   const handleClick = () => {
     if (authToken) {
       removeCookie('UserId', cookies.UserId)
       removeCookie('AuthToken', cookies.AuthToken)
+      localStorage.removeItem("UsersFav")
       window.location.reload()
       return
     }
@@ -25,7 +28,6 @@ const Home = () => {
     <div className='overlay'>
       <Nav
         authToken={authToken}
-        minimal={false}
         setShowModal={setShowModal}
         showModal={showModal}
         setIsSignUp={setIsSignUp}

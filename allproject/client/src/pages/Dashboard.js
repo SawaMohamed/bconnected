@@ -1,9 +1,11 @@
 import {} from 'react-router-dom'
+import axios from 'axios'
 import TinderCard from 'react-tinder-card'
 import { useEffect, useState } from 'react'
 import ChatContainer from '../components/ChatContainer'
 import NavDashboard from '../components/NavHome'
 import { useCookies } from 'react-cookie'
+<<<<<<< HEAD
 import axios from 'axios'
 import HandshakeIcon from '@mui/icons-material/Handshake'
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined'
@@ -11,6 +13,8 @@ import StarIcon from '@mui/icons-material/Star'
 import CloseIcon from '@mui/icons-material/Close'
 import IconButton from '@material-ui/core/IconButton'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+=======
+>>>>>>> main
 
 
 
@@ -23,19 +27,18 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
   const [professionFilter, setProfessionFilter] = useState(null)
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const [favUsers, setFavUsers] = useState([])
+<<<<<<< HEAD
   const [tinderLayoutHeight, setTinderLayoutHeight] = useState("none")
   const [buttonLayout, setButtonLayout] = useState("flex")
 
+=======
+  const [finalFilteredUsers, setFinalFilteredUsers] = useState([])
+>>>>>>> main
 
   const userId = cookies.UserId
   // @desc      get all users & get current user
   const getUser = async () => {
     try {
-      // const response = await axios.get('http://localhost:8000/user', {
-      //     params: {userId}
-      // })
-      //   setUser(user.data)
-
       const response = await axios.get(`http://localhost:8000/users`)
       setUsers(response.data)
 
@@ -44,7 +47,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
       )
       setUser(activeUser.data)
     } catch (error) {
-      // console.error(error.message)
       console.log(error.message)
     }
   }
@@ -75,6 +77,23 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
     }
   }
 
+  // @desc    add user to favorites add filter them form list
+  const addFav = async i => {
+    try {
+      let userFavUpdate = i.user_id
+      await axios.put('http://localhost:8000/addfav', {
+        userId,
+        userFavUpdate,
+      })
+      let arr = []
+      finalFilteredUsers.map(e => e.user_id !== userFavUpdate && arr.push(e))
+      setFinalFilteredUsers(arr)
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
+
+  // @desc    swipe user to update matches
   const swiped = (direction, swipedUserId) => {
     if (direction === 'right') {
       updateMatches(swipedUserId)
@@ -97,23 +116,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
     .map(({ user_id }) => user_id)
     .concat(userId)
 
-  // @desc        filter matched users out of your interest users
-  // @desc        finally use this array to display users
-  const filteredGenderedUsers = usersJobs?.filter(
-    e => !matchedUserIds.includes(e.user_id)
-  )
-
-  const addFav = i => {
-    if (localStorage.getItem('UsersFav')) {
-      let arr = JSON.parse(localStorage.getItem('UsersFav'))
-      arr.push(i)
-      localStorage.setItem('UsersFav', JSON.stringify(arr))
-    } else {
-      let arr = []
-      arr.push(i)
-      localStorage.setItem('UsersFav', JSON.stringify(arr))
-    }
-  }
+  user?.favUsers.forEach(({ user_id }) => {
+    matchedUserIds.push(user_id)
+  })
 
   const hideTinderLayout = () => {
   if (tinderLayoutHeight==="flex")
@@ -136,6 +141,15 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
       usersJobInterest()
     }
   }, [user])
+  
+
+  useEffect(() => {
+    if (user) {
+      setFinalFilteredUsers(
+        usersJobs?.filter(e => !matchedUserIds.includes(e.user_id))
+      )
+    }
+  }, [usersJobs])
 
 
 
@@ -143,10 +157,10 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
     <>
       {user && (
         <div className='dashboard'>
-          <ChatContainer user={user} />
+      {/*  <ChatContainer user={user} /> */}
           <div className='swipe-container'>
             <div className='card-container'>
-              {filteredGenderedUsers?.map(i => (
+              {finalFilteredUsers?.map(i => (
                 <TinderCard
                   className='swipe'
                   key={i.user_id}
@@ -178,6 +192,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
                   >
                     <h3 className="card-title">{i.first_name} {i.last_name}, {i.profession}</h3>
                   </div>
+<<<<<<< HEAD
                   
                   <IconButton className="swipeButton-favorite" onClick={() => addFav(i)}><StarIcon fontSize="large" /></IconButton>
                 
@@ -195,6 +210,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
               </div>*/}
                 
                 
+=======
+                  <button className='fav-button' onClick={() => addFav(i)}>
+                    Favorites
+                  </button>
+>>>>>>> main
                 </TinderCard>
               ))}
               

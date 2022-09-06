@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
+import Logout from '../components/Logout';
 
 const NavDashboard = () => {
   return (
@@ -9,6 +10,7 @@ const NavDashboard = () => {
         <Link to='/dashboard'>Dashboard</Link>
         <Link to='/onboarding'>Options</Link>
         <Link to='/chat'>Chat</Link>
+        <Logout />
       </nav>
     </div>
   )

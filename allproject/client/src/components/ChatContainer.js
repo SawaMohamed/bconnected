@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 const ChatContainer = ({ user }) => {
   const [clickedUser, setClickedUser] = useState()
+
   return (
     <div className='chat-container'>
       <ChatHeader user={user} />
@@ -20,7 +21,7 @@ const ChatContainer = ({ user }) => {
 
       {!clickedUser && (
         <MatchesDisplay
-          matches={user&&user.matches}
+          matches={user?.matches}
           setClickedUser={setClickedUser}
         />
       )}

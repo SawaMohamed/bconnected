@@ -15,11 +15,11 @@ const App = () => {
         <BrowserRouter>
             <NavHome/>
             <Routes>
-                <Route path="/" element={<Home/>}/>
+                {authToken && <Route path="/onboarding" element={<OnBoarding/>}/>}
                 {authToken && <Route path="/dashboard" element={<Dashboard/>}/>}
+                <Route path="/" element={<Home/>}/>
                 <Route path="/fav" element={<FavUsers />} />
                 {/* <Route path="/chat" element={<FavUsers />} /> */}
-                {authToken && <Route path="/onboarding" element={<OnBoarding/>}/>}
 
             </Routes>
 

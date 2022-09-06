@@ -4,7 +4,7 @@ const User = require('../models/userModel')
 // @desc      update user matches with selected userId
 const updateMatches = asyncHandler(async (req, res) => {
   const { userId, userFavUpdate } = req.body
-  console.log(userFavUpdate)
+  
   const query = { user_id: userId }
   const updateDocument = {
     $push: { favUsers: { user_id: userFavUpdate } },

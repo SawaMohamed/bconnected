@@ -12,10 +12,12 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
 
   const getMatches = async () => {
     try {
+      if (matchedUserIds){
       const response = await axios.get('http://localhost:8000/matches', {
         params: { userIds: JSON.stringify(matchedUserIds) },
       })
       setMatchedProfiles(response.data)
+    } 
     } catch (error) {
       console.log(error.message);
     }

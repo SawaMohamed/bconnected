@@ -10,10 +10,10 @@ const ChatContainer = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const [user, setUser] = useState(null);
   const userId = cookies.UserId;
+  
   // @desc      get all users & get current user
   const getUser = async () => {
     try {
-      
 
       const activeUser = await axios.get(
         `http://localhost:8000/users/${userId}`

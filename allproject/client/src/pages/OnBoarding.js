@@ -30,6 +30,7 @@ const OnBoarding = () => {
     link_portfolio: '',
     link_github: '',
     matches: [],
+    favUsers: [],
   })
 
   let navigate = useNavigate()

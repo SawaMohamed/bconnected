@@ -63,6 +63,9 @@ const userSchema = mongoose.Schema(
     matches: {
       type: Array,
     },
+    favUsers: {
+      type: Array,
+    },
   },
   {
     timestamps: true,

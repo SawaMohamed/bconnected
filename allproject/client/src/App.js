@@ -12,18 +12,14 @@ const App = () => {
 
   const authToken = cookies.AuthToken;
 
-  return (
-    <BrowserRouter>
-      <NavHome />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {authToken && <Route path="/dashboard" element={<Dashboard />} />}
-        <Route path="/fav" element={<FavUsers />} />
-        {<Route path="/chat" element={<ChatContainer />} />}
-        {authToken && <Route path="/onboarding" element={<OnBoarding />} />}
-      </Routes>
-    </BrowserRouter>
-  );
-};
+    return (
+        <BrowserRouter>
+            <NavHome/>
+            <Routes>
+                {authToken && <Route path="/onboarding" element={<OnBoarding/>}/>}
+                {authToken && <Route path="/dashboard" element={<Dashboard/>}/>}
+                <Route path="/" element={<Home/>}/>
+                <Route path="/fav" element={<FavUsers />} />
+                {/* <Route path="/chat" element={<FavUsers />} /> */}
 
 export default App;

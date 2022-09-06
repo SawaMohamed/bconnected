@@ -38,6 +38,9 @@ const ChatContainer = () => {
     };
   }, []);
 
+const ChatContainer = ({ user }) => {
+  const [clickedUser, setClickedUser] = useState()
+
   return (
     <div className="chat-container">
       <ChatHeader user={user} />
@@ -53,7 +56,7 @@ const ChatContainer = () => {
 
       {!clickedUser && (
         <MatchesDisplay
-          matches={user && user.matches}
+          matches={user?.matches}
           setClickedUser={setClickedUser}
         />
       )}

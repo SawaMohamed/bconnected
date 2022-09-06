@@ -205,9 +205,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
                 
                 
 
-                  <button className='fav-button' onClick={() => addFav(i)}>
+                  {/* <button className='fav-button' onClick={() => addFav(i)}>
                     Favorites
-                  </button>
+                  </button> */}
 
                 </TinderCard>
               ))}

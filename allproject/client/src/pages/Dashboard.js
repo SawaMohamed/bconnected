@@ -5,8 +5,16 @@ import ChatContainer from '../components/ChatContainer'
 import NavDashboard from '../components/NavHome'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
+import HandshakeIcon from '@mui/icons-material/Handshake'
+import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined'
+import StarIcon from '@mui/icons-material/Star'
+import CloseIcon from '@mui/icons-material/Close'
+import IconButton from '@material-ui/core/IconButton'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-const Dashboard = () => {
+
+
+ const Dashboard = () => {
   const [user, setUser] = useState(null)
   const [users, setUsers] = useState(null)
   const [usersJobs, setUsersJobs] = useState(null)
@@ -15,6 +23,9 @@ const Dashboard = () => {
   const [professionFilter, setProfessionFilter] = useState(null)
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const [favUsers, setFavUsers] = useState([])
+  const [tinderLayoutHeight, setTinderLayoutHeight] = useState("none")
+  const [buttonLayout, setButtonLayout] = useState("flex")
+
 
   const userId = cookies.UserId
   // @desc      get all users & get current user
@@ -71,6 +82,12 @@ const Dashboard = () => {
     setLastDirection(direction)
   }
 
+  const clicked = (direction, swipedUserId) => {
+    
+      updateMatches(swipedUserId)
+    
+  }
+
   const outOfFrame = name => {
     console.log(name + ' left the screen!')
   }
@@ -98,6 +115,18 @@ const Dashboard = () => {
     }
   }
 
+  const hideTinderLayout = () => {
+  if (tinderLayoutHeight==="flex")
+    {
+    setTinderLayoutHeight("none")
+    setButtonLayout("flex")
+  } else {
+    setTinderLayoutHeight("flex")
+    setButtonLayout("none")
+  } 
+     
+  }
+
   useEffect(() => {
     getUser()
   }, [])
@@ -107,6 +136,8 @@ const Dashboard = () => {
       usersJobInterest()
     }
   }, [user])
+
+
 
   return (
     <>
@@ -122,19 +153,67 @@ const Dashboard = () => {
                   onSwipe={dir => swiped(dir, i.user_id)}
                   onCardLeftScreen={() => outOfFrame(i.first_name)}
                 >
+                  <IconButton className="show-card-content" onClick={hideTinderLayout} style={{ display:`${buttonLayout}`}}><ArrowDropDownCircleOutlinedIcon /></IconButton>
+
+                  <div className="tinder-layout" style={{ display:`${tinderLayoutHeight}` }}>
+                    <IconButton className="hide-card-content" onClick={hideTinderLayout}><ArrowBackIcon /></IconButton>
+                    <p className="card-content-about" style={{fontSize:'16px'}}>About me:
+                      <br></br>
+                      <br></br> 
+                      <p style={{fontSize:'14px'}}>{i.about}</p>
+                      </p>
+                    <p className="card-content-interest">I am looking for..
+                      <br></br>
+                      <br></br>
+                      <p style={{fontSize:'14px'}}>{i.interest}</p>
+                      </p>
+                    <p className="card-content-links">You can also find me at: 
+                      <br></br>
+                      <br></br> 
+                      <p className="interest-content" style={{fontSize:'14px'}}>{i.link_github}{i.link_portfolio}{i.link_linkedin}</p></p>
+                  </div>
                   <div
                     style={{ backgroundImage: 'url(' + i.url + ')' }}
                     className='card'
                   >
-                    <h3>{i.first_name}</h3>
+                    <h3 className="card-title">{i.first_name} {i.last_name}, {i.profession}</h3>
                   </div>
-                  <button className='fav-button' onClick={() => addFav(i)}>Favorites</button>
+                  
+                  <IconButton className="swipeButton-favorite" onClick={() => addFav(i)}><StarIcon fontSize="large" /></IconButton>
+                
+                  {/* <div className="swipe-icons">
+              <IconButton className="swipeButton_close" onClick={dir => swiped(dir, i.user_id)}>
+                <CloseIcon fontSize="large" /> 
+              </IconButton>
+              <IconButton className="swipeButton-favorite">
+                <StarIcon fontSize="large" />
+              </IconButton>
+              <IconButton className="swipeButton-like"> 
+                <HandshakeIcon fontSize="large" />
+              </IconButton> 
+                 
+              </div>*/}
+                
+                
                 </TinderCard>
               ))}
+              
               <div className='swipe-info'>
                 {lastDirection ? <p>You swiped {lastDirection}</p> : <p />}
               </div>
             </div>
+            <div className="swipe-icons">
+              <IconButton className="swipeButton_close" onClick={clicked}>
+                <CloseIcon fontSize="large" /> 
+              </IconButton>
+              {/* <IconButton className="swipeButton-favorite">
+                <StarIcon fontSize="large" /> 
+              </IconButton>*/} 
+              <IconButton className="swipeButton-like"> 
+                <HandshakeIcon fontSize="large" />
+              </IconButton>
+                 
+              </div>
           </div>
         </div>
       )}

@@ -123,7 +123,7 @@ const OnBoarding = () => {
       <Nav minimal={true} setShowModal={() => {}} showModal={false} />
 
       <div className='onboarding'>
-        <h2>CREATE ACCOUNT</h2>
+        <h2 className="form-title">Personal details</h2>
 
         <form onSubmit={handleSubmit}>
           <section>
@@ -219,7 +219,7 @@ const OnBoarding = () => {
             </div>
 
             <label htmlFor='profession'>Profession</label>
-            <select name='profession' onChange={handleChange}>
+            <select className="profession-select" name='profession' onChange={handleChange}>
               <option value=''>Your Profession</option>
               <option value='it'>IT</option>
               <option value='engineering'>Engineering</option>
@@ -237,11 +237,12 @@ const OnBoarding = () => {
 
             <label htmlFor='about'>About me</label>
             <textarea
+              className='about'
               id='about'
               type='textarea'
               name='about'
               required={true}
-              placeholder='Professional overview!'
+              placeholder='Professional overview'
               value={formData.about}
               onChange={handleChange}
               rows='4'
@@ -251,7 +252,7 @@ const OnBoarding = () => {
             <input
               id='linkedin'
               name='link_linkedin'
-              placeholder='Linkedin!'
+              placeholder='Linkedin'
               value={formData.link_linkedin}
               onChange={handleChange}
             />
@@ -259,7 +260,7 @@ const OnBoarding = () => {
             <input
               id='portfolio'
               name='link_portfolio'
-              placeholder='Portfolio!'
+              placeholder='Portfolio'
               value={formData.link_portfolio}
               onChange={handleChange}
             />
@@ -267,12 +268,12 @@ const OnBoarding = () => {
             <input
               id='github'
               name='link_github'
-              placeholder='Github!'
+              placeholder='Github'
               value={formData.link_github}
               onChange={handleChange}
             />
 
-            <input type='submit' />
+            <input className="submit-button" type='submit' />
           </section>
 
           <section>
@@ -282,6 +283,7 @@ const OnBoarding = () => {
               type='url'
               name='url'
               id='url'
+              placeholder='Image URL'
               onChange={handleChange}
               // required={true}
             />
@@ -291,7 +293,7 @@ const OnBoarding = () => {
               name='Choose File'
               onChange={e => setImageUpload(e.target.files[0])}
             />
-            <button id='upload-btn' onClick={uploadImage}>
+            <button className='picture-upload' id='upload-btn' onClick={uploadImage}>
               Upload
             </button>
             <div className='photo-container'>

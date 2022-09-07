@@ -1,9 +1,9 @@
 const express = require('express')
-const { updateMatches,getFav } = require('../controllres/addFavControllers')
+const { updateFav,getFav } = require('../controllres/addFavControllers')
 
 const router = express.Router()
 
-router.put('/', updateMatches)
+router.put('/', updateFav)
 router.get('/', getFav)
 
 module.exports = router

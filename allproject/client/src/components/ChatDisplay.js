@@ -3,7 +3,6 @@ import ChatInput from './ChatInput'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
-
 const ChatDisplay = ({ user, clickedUser }) => {
   const userId = user?.user_id
   const clickedUserId = clickedUser?.user_id
@@ -33,10 +32,10 @@ const ChatDisplay = ({ user, clickedUser }) => {
   }
 
   useEffect(() => {
-    setInterval(() => {
-      getUsersMessages()
-      getClickedUsersMessages()
-    }, 2000)
+    // setInterval(() => {
+    getUsersMessages()
+    getClickedUsersMessages()
+    // }, 2000)
   }, [])
 
   const messages = []
@@ -47,6 +46,7 @@ const ChatDisplay = ({ user, clickedUser }) => {
     formattedMessage['img'] = user?.url
     formattedMessage['message'] = message.message
     formattedMessage['createdAt'] = message.createdAt
+    formattedMessage['senderId'] = message.from_userId
     messages.push(formattedMessage)
   })
 
@@ -56,6 +56,7 @@ const ChatDisplay = ({ user, clickedUser }) => {
     formattedMessage['img'] = clickedUser?.url
     formattedMessage['message'] = message.message
     formattedMessage['createdAt'] = message.createdAt
+    formattedMessage['senderId'] = message.from_userId
     messages.push(formattedMessage)
   })
 
@@ -63,11 +64,9 @@ const ChatDisplay = ({ user, clickedUser }) => {
     a.createdAt.localeCompare(b.createdAt)
   )
 
-  
-
   return (
     <div>
-      <Chat descendingOrderMessages={descendingOrderMessages} />
+      <Chat descendingOrderMessages={descendingOrderMessages} userId={userId} />
       <ChatInput
         user={user}
         clickedUser={clickedUser}

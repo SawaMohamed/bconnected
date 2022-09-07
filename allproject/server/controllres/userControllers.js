@@ -79,8 +79,9 @@ const updateUser = asyncHandler(async (req, res) => {
     link_portfolio,
     link_github,
     matches,
+    favUsers
   } = req.body.formData
-
+ console.log(favUsers)
   if (user) {
     user.dob = dob
     user.show_dob = show_dob
@@ -94,6 +95,7 @@ const updateUser = asyncHandler(async (req, res) => {
     user.link_portfolio = link_portfolio
     user.link_github = link_github
     user.matches = matches
+    user.favUsers = favUsers
   }
   const updatedUser = await user.save()
   res.status(200).json(updatedUser)

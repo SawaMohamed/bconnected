@@ -12,9 +12,11 @@ const App = () => {
 
   const authToken = cookies.AuthToken
 
+  const show = window.location.href === 'http://localhost:3000/'
+  
   return (
     <BrowserRouter>
-      <NavHome />
+      {!show && <NavHome />}
       <Routes>
         {authToken && <Route path='/onboarding' element={<OnBoarding />} />}
         {authToken && <Route path='/dashboard' element={<Dashboard />} />}
@@ -24,7 +26,6 @@ const App = () => {
       </Routes>
     </BrowserRouter>
   )
-
 }
 
-export default App;
+export default App

@@ -10,11 +10,11 @@ import { storage } from '../utils/firebase'
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
 
 const OnBoarding = () => {
-  //   const [uploading, setUploading] = useState(false)
   const [image, setImage] = useState(null)
   const [imageList, setImageList] = useState([])
   const [imageUpload, setImageUpload] = useState(null)
   const [cookies, setCookie, removeCookie] = useCookies(null)
+  const [user, setUser] = useState(null)
   const [formData, setFormData] = useState({
     user_id: cookies.UserId,
     dob: '',
@@ -113,31 +113,40 @@ const OnBoarding = () => {
           })
         })
       })
+      setUser(
+        localStorage.getItem('currentUser') &&
+          JSON.parse(localStorage.getItem('currentUser'))
+      )
     }
   }, [])
 
-  // console.log(formData?.dob);
-  // console.log(Date(formData?.dob));
+  useEffect(() => {
+    setFormData(pre => {
+      return { ...pre, ...user }
+    })
+    console.log(formData)
+    console.log(user)
+  }, [user])
 
   return (
     <>
       <Nav minimal={true} setShowModal={() => {}} showModal={false} />
 
       <div className='onboarding'>
-        <h2 className="form-title">Personal details</h2>
+        <h2 className='form-title'>Personal details</h2>
 
         <form onSubmit={handleSubmit}>
           <section>
             <label htmlFor='dob'>Birthday</label>
-              <input
-                id='dob'
-                type='Date'
-                name='dob'
-                value={formData.dob}
-                min='1940-01-01'
-                max='2006-12-31'
-                onChange={handleChange}
-              />
+            <input
+              id='dob'
+              type='Date'
+              name='dob'
+              value={ formData.dob}
+              min='1940-01-01'
+              max='2006-12-31'
+              onChange={handleChange}
+            />
 
             <label htmlFor='show-dob'>Show Age on my Profile</label>
             <input
@@ -220,7 +229,12 @@ const OnBoarding = () => {
             </div>
 
             <label htmlFor='profession'>Profession</label>
-            <select className="profession-select" name='profession' onChange={handleChange}>
+            <select
+              className='profession-select'
+              name='profession'
+              value={formData?.profession}
+              onChange={handleChange}
+            >
               <option value=''>Your Profession</option>
               <option value='it'>IT</option>
               <option value='engineering'>Engineering</option>
@@ -274,7 +288,7 @@ const OnBoarding = () => {
               onChange={handleChange}
             />
 
-            <input className="submit-button" type='submit' />
+            <input className='submit-button' type='submit' />
           </section>
 
           <section>
@@ -284,6 +298,7 @@ const OnBoarding = () => {
               type='url'
               name='url'
               id='url'
+              value={formData.url}
               placeholder='Image URL'
               onChange={handleChange}
               // required={true}
@@ -294,7 +309,11 @@ const OnBoarding = () => {
               name='Choose File'
               onChange={e => setImageUpload(e.target.files[0])}
             />
-            <button className='picture-upload' id='upload-btn' onClick={uploadImage}>
+            <button
+              className='picture-upload'
+              id='upload-btn'
+              onClick={uploadImage}
+            >
               Upload
             </button>
             <div className='photo-container'>
@@ -306,6 +325,206 @@ const OnBoarding = () => {
         </form>
       </div>
     </>
+
+    // <>
+    //   <Nav minimal={true} setShowModal={() => {}} showModal={false} />
+
+    //   <div className='onboarding'>
+    //     <h2 className='form-title'>Personal details</h2>
+
+    //     <form onSubmit={handleSubmit}>
+    //       <section>
+    //         <label htmlFor='dob'>Birthday</label>
+    //         <input
+    //           id='dob'
+    //           type='Date'
+    //           name='dob'
+    //           value={user ? user.dob : formData.dob}
+    //           min='1940-01-01'
+    //           max='2006-12-31'
+    //           onChange={handleChange}
+    //         />
+
+    //         <label htmlFor='show-dob'>Show Age on my Profile</label>
+    //         <input
+    //           id='show-dob'
+    //           type='checkbox'
+    //           name='show_dob'
+    //           onChange={handleChange}
+    //           value={formData.show_dob}
+    //           // value={user ? user.show_dob : formData.show_dob}
+    //           checked={user?.show_dob||formData?.show_dob}
+    //         />
+
+    //         <label>Gender</label>
+    //         <div className='multiple-input-container'>
+    //           <input
+    //             id='man-gender-identity'
+    //             type='radio'
+    //             name='gender_identity'
+    //             value='man'
+    //             onChange={handleChange}
+    //             checked={user?.gender_identity === 'man'|| formData?.gender_identity === 'man'}
+    //           />
+    //           <label htmlFor='man-gender-identity'>Man</label>
+    //           <input
+    //             id='woman-gender-identity'
+    //             type='radio'
+    //             name='gender_identity'
+    //             value='woman'
+    //             onChange={handleChange}
+    //             checked={user?.gender_identity === 'woman'|| formData?.gender_identity === 'woman'}
+    //           />
+    //           <label htmlFor='woman-gender-identity'>Woman</label>
+    //           <input
+    //             id='other-gender-identity'
+    //             type='radio'
+    //             name='gender_identity'
+    //             value='other'
+    //             onChange={handleChange}
+    //             checked={user?.gender_identity === 'other'|| formData?.gender_identity === 'other'}
+    //           />
+    //           <label htmlFor='other-gender-identity'>Other</label>
+    //         </div>
+
+    //         <label htmlFor='show-gender'>Show Gender on my Profile</label>
+
+    //         <input
+    //           id='show-gender'
+    //           type='checkbox'
+    //           name='show_gender'
+    //           value={user ? user.show_gender : formData.show_gender}
+    //           onChange={handleChange}
+    //           checked={user?.show_gender||formData?.show_gender}
+    //         />
+    //         <label>Your Interest</label>
+    //         <div className='multiple-input-container'>
+    //           <input
+    //             id='job'
+    //             type='radio'
+    //             name='interest'
+    //             value='job'
+    //             onChange={handleChange}
+    //             checked={user?.interest === 'job'||formData?.interest === 'job'}
+    //           />
+    //           <label htmlFor='job'>Job</label>
+    //           <input
+    //             id='hiring'
+    //             type='radio'
+    //             name='interest'
+    //             value='hiring'
+    //             onChange={handleChange}
+    //             checked={user?.interest === 'hiring'||formData?.interest === 'hiring'}
+    //           />
+    //           <label htmlFor='hiring'>Hiring</label>
+    //           <input
+    //             id='browsing'
+    //             type='radio'
+    //             name='interest'
+    //             value='browsing'
+    //             onChange={handleChange}
+    //             checked={user?.interest === 'browsing'||formData?.interest === 'browsing'}
+    //           />
+    //           <label htmlFor='browsing'>Browsing</label>
+    //         </div>
+
+    //         <label htmlFor='profession'>Profession</label>
+    //         <select
+    //           className='profession-select'
+    //           name='profession'
+    //           value={user ? user.profession : formData.profession}
+    //           onChange={handleChange}
+    //         >
+    //           <option value=''>Your Profession</option>
+    //           <option value='it'>IT</option>
+    //           <option value='engineering'>Engineering</option>
+    //           <option value='marketing_sales'>Marketing & Sales</option>
+    //           <option value='medicine'>Medicine</option>
+    //           <option value='architecture_design'>Architecture & Design</option>
+    //           <option value='sport'>Sport</option>
+    //           <option value='arts'>Arts</option>
+    //           <option value='commerce'>Commerce</option>
+    //           <option value='hospitality'>Hospitality</option>
+    //           <option value='low'>Low</option>
+    //           <option value='education'>Education</option>
+    //           <option value='other'>Other</option>
+    //         </select>
+
+    //         <label htmlFor='about'>About me</label>
+    //         <textarea
+    //           className='about'
+    //           id='about'
+    //           type='textarea'
+    //           name='about'
+    //           required={true}
+    //           placeholder='Professional overview'
+    //           value={user ? user.about : formData.about}
+    //           onChange={handleChange}
+    //           rows='4'
+    //           cols='50'
+    //         ></textarea>
+    //         <label htmlFor='linkedin'>Linkedin</label>
+    //         <input
+    //           id='linkedin'
+    //           name='link_linkedin'
+    //           placeholder='Linkedin'
+    //           value={user ? user.link_linkedin : formData.link_linkedin}
+    //           onChange={handleChange}
+    //         />
+    //         <label htmlFor='portfolio'>Portfolio</label>
+    //         <input
+    //           id='portfolio'
+    //           name='link_portfolio'
+    //           placeholder='Portfolio'
+    //           value={user ? user.link_portfolio : formData.link_portfolio}
+    //           onChange={handleChange}
+    //         />
+    //         <label htmlFor='github'>Github</label>
+    //         <input
+    //           id='github'
+    //           name='link_github'
+    //           placeholder='Github'
+    //           value={user ? user.link_github : formData.link_github}
+    //           onChange={handleChange}
+    //         />
+
+    //         <input className='submit-button' type='submit' />
+    //       </section>
+
+    //       <section>
+    //         <label htmlFor='url'>Profile Photo</label>
+
+    //         <input
+    //           type='url'
+    //           name='url'
+    //           id='url'
+    //           value={user ? user.url : formData.url}
+    //           placeholder='Image URL'
+    //           onChange={handleChange}
+    //           // required={true}
+    //         />
+    //         <input
+    //           type='file'
+    //           id='image-file'
+    //           name='Choose File'
+    //           onChange={e => setImageUpload(e.target.files[0])}
+    //         />
+    //         <button
+    //           className='picture-upload'
+    //           id='upload-btn'
+    //           onClick={uploadImage}
+    //         >
+    //           Upload
+    //         </button>
+    //         <div className='photo-container'>
+    //           {formData.url && (
+    //             <img src={formData.url} alt='profile pic preview' />
+    //           )}
+    //         </div>
+    //       </section>
+    //     </form>
+    //   </div>
+    // </>
   )
 }
 export default OnBoarding

@@ -46,19 +46,6 @@ const Dashboard = () => {
     }
   }
 
-  // @desc      add matched users to your matches array
-  const updateMatches = async matchedUserId => {
-    try {
-      await axios.put('http://localhost:8000/users', {
-        userId,
-        matchedUserId,
-      })
-      getUser()
-    } catch (err) {
-      console.log(err.message)
-    }
-  }
-
   // @desc    add user to favorites add filter them form list
   const addFav = async i => {
     try {

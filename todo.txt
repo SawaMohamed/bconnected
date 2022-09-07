@@ -1,0 +1,8 @@
+remove user from list of users
+make profession dropdown input
+make about me text area input
+make photo required
+photo needs placeHolder
+Birthday must be dates not numbers
+make links dropdown select input
+

@@ -5,51 +5,35 @@ import { useCookies } from "react-cookie";
 
 
 const AuthModal = ({ setShowModal, isSignUp }) => {
-  const [confirmPassword, setConfirmPassword] = useState(null);
-  const [error, setError] = useState(null);
-  const [cookies, setCookie, removeCookie] = useCookies(null);
-  const [user, setUser] = useState(null);
-  console.log(user);
-  
-  
-  let navigate = useNavigate();
+  const [confirmPassword, setConfirmPassword] = useState(null)
+  const [error, setError] = useState(null)
+  const [cookies, setCookie, removeCookie] = useCookies(null)
+  const [user, setUser] = useState(null)
+
+
+  let navigate = useNavigate()
+
+  // @desc    handle all inputs form in one function
   const onInput = e =>
   setUser({ ...user, ...{ [e.target.name]: e.target.value } })
 
-  // console.log(email, password, confirmPassword);
-
+  // @desc    x button will remove form
   const handleClick = () => {
     setShowModal(false);
   };
 
 
-  // create user from frontend
+  // @desc    signup || login user
   const handleSubmit = async e => {
     e.preventDefault()
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-
     try {
-    //   if (isSignUp && password !== confirmPassword) {
-    //     setError("Passwords need to match!");
-    //     return;
-    //   }
-
-    const user1 = {
-      first_name: "ALI",
-      last_name: "MEMM",
-      email: "sldjofds@gmail.com",
-      password: "122",
-      isAdmin: true,
-      photo: "src",
-      profession: "IT",
-      interest: "computer",
-      about: "anything",
-    };
-       user.isAdmin = false;
-       //console.log(user);
+      if (isSignUp && user.password !== confirmPassword) {
+        console.log('Passwords need to match!')
+        setError('Passwords need to match!')
+        return
+      }
+      // adding isAdmin default = false for every new user
+      user.isAdmin = false
       const response = await axios.post(
         `http://localhost:8000/users`,
         user
@@ -86,12 +70,56 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
         ⓧ
       </div>
 
-      <h2>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
+      <h2 className="form-title">{isSignUp ? 'CREATE ACCOUNT' : 'LOG IN'}</h2>
       <p>
         By clicking Log In, you agree to our terms. Learn how we process your
         data in our Privacy Policy and Cookie Policy.
       </p>
-      {/* <form onSubmit={handleSubmit}>
+
+      <form action='submit' onSubmit={e => handleSubmit(e)}>
+        <label className="form-label" htmlFor='First Name'>First Name</label>
+        <input autoFocus name='first_name' type='text' onInput={onInput} />
+        <label className="form-label" htmlFor='Last Name'>Last Name</label>
+
+        <input name='last_name' type='text' onInput={onInput} />
+        <label className="form-label" htmlFor='email'>Email</label>
+        <input name='email' type='text' onInput={onInput} />
+
+        <label className="form-label" htmlFor='password'>Password</label>
+        <input name='password' type='password' onInput={onInput} />
+
+        {isSignUp && (
+          <>
+            <label className="form-label" htmlFor='password'>Confirm Password</label>
+            <input
+              name='confirm password'
+              type='password'
+              onInput={e => setConfirmPassword(e.target.value)}
+            />
+          </>
+        )}
+
+        {/* <label htmlFor='photo'>Photo</label>
+        <input name='photo' type='text' onInput={onInput} /> */}
+        {/* <label htmlFor='profession'>Profession</label>
+        <input name='profession' type='text' onInput={onInput} />
+        <label htmlFor='interest'>Interest</label>
+        <input name='interest' type='text' onInput={onInput} />
+        <label htmlFor='about'>About</label>
+        <input name='about' type='text' onInput={onInput} /> */}
+
+        <button classname="sumbit-form">Submit</button>
+      </form>
+
+      <hr />
+      
+    </div>
+  )
+}
+export default AuthModal
+
+{
+  /* <form onSubmit={handleSubmit}>
       <input
           type="text"
           id="f_name"
@@ -101,31 +129,15 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
           onChange={(e) => setFirstName(e.target.value)}
         />
 
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="email"
-          required={true}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="password"
-          required={true}
-          onChange={(e) => setPassword(e.target.value)}
-        />
         {isSignUp && (
-          <input
-            type="password"
-            id="password-check"
-            name="password-check"
-            placeholder="confirm password"
-            required={true}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+          <>
+            <label className="form-label" htmlFor='password'>Confirm Password</label>
+            <input
+              name='confirm password'
+              type='password'
+              onInput={e => setConfirmPassword(e.target.value)}
+            />
+          </>
         )}
         <input className="secondary-button" type="submit" />
         <p>{error}</p>
@@ -191,3 +203,4 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   );
 };
 export default AuthModal;
+

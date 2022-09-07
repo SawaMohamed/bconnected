@@ -1,12 +1,17 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 const userSchema = mongoose.Schema(
   {
+    user_id: {
+      type: String,
+    },
     first_name: {
       type: String,
+      required: true,
     },
     last_name: {
       type: String,
+      required: true,
     },
     email: {
       type: String,
@@ -22,10 +27,8 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-    photo: {
+    url: {
       type: String,
-      required: true,
-      unique: true,
     },
     profession: {
       type: String,
@@ -36,25 +39,52 @@ const userSchema = mongoose.Schema(
     about: {
       type: String,
     },
+    dob: {
+      type: String,
+    },
+    show_dob: {
+      type: Boolean,
+    },
+    gender_identity: {
+      type: String,
+    },
+    show_gender: {
+      type: Boolean,
+    },
+    link_linkedin: {
+      type: String,
+    },
+    link_portfolio: {
+      type: String,
+    },
+    link_github: {
+      type: String,
+    },
+    matches: {
+      type: Array,
+    },
+    favUsers: {
+      type: Array,
+    },
   },
   {
     timestamps: true,
   }
-);
+)
 // when we login
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
-};
+  return await bcrypt.compare(enteredPassword, this.password)
+}
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    next();
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next()
   }
-// It will work only when we login
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-});
+  // It will work only when we login
+  const salt = await bcrypt.genSalt(10)
+  this.password = await bcrypt.hash(this.password, salt)
+})
 
-const model = mongoose.model("User", userSchema);
+const model = mongoose.model('User', userSchema)
 
-module.exports = model;
+module.exports = model

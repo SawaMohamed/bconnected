@@ -1,25 +1,62 @@
-import ChatHeader from './ChatHeader'
-import MatchesDisplay from './MatchesDisplay'
-import ChatDisplay from './ChatDisplay'
-import { useState } from 'react'
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import ChatDisplay from "./ChatDisplay";
+import ChatHeader from "./ChatHeader";
+import MatchesDisplay from "./MatchesDisplay";
 
-const ChatContainer = ({ user }) => {
-    const [ clickedUser, setClickedUser ] = useState(null)
+const ChatContainer = () => {
+  const [clickedUser, setClickedUser] = useState();
+  const [cookies, setCookie, removeCookie] = useCookies(null);
+  const [user, setUser] = useState(null);
+  const userId = cookies.UserId;
+  
+  // @desc      get all users & get current user
+  const getUser = async () => {
+    try {
 
-    return (
-        <div className="chat-container">
-            <ChatHeader user={user}/>
+      const activeUser = await axios.get(
+        `http://localhost:8000/users/${userId}`
+      );
 
-            <div>
-                <button className="option" onClick={() => setClickedUser(null)}>Matches</button>
-                <button className="option" disabled={!clickedUser}>Chat</button>
-            </div>
+      setUser(activeUser.data);
+    } catch (error) {
+      // console.error(error.message)
+      console.log(error.message);
+    }
+  };
 
-            {!clickedUser && <MatchesDisplay matches={user.matches} setClickedUser={setClickedUser}/>}
+  useEffect(() => {
+    return () => {
+      getUser();
+    };
+  }, []);
 
-            {clickedUser && <ChatDisplay user={user} clickedUser={clickedUser}/>}
-        </div>
-    )
-}
 
-export default ChatContainer
+
+  return (
+    <div className="chat-container">
+      <ChatHeader user={user} />
+
+      <div>
+        <button className="option" onClick={() => setClickedUser(null)}>
+          Matches
+        </button>
+        <button className="option" disabled={!clickedUser}>
+          Chat
+        </button>
+      </div>
+
+      {!clickedUser && (
+        <MatchesDisplay
+          matches={user?.matches}
+          setClickedUser={setClickedUser}
+        />
+      )}
+
+      {clickedUser && <ChatDisplay user={user} clickedUser={clickedUser} />}
+    </div>
+  );
+};
+
+export default ChatContainer;

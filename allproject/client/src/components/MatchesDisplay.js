@@ -6,23 +6,26 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
   const [matchedProfiles, setMatchedProfiles] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(null);
 
-  const matchedUserIds = matches.map(({ user_id }) => user_id);
+  const matchedUserIds = matches?.map(({ user_id }) => user_id);
+  // const matchedUserIds = matches.map(({ user_id }) => user_id)
   const userId = cookies.UserId;
 
   const getMatches = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/users", {
+      if (matchedUserIds){
+      const response = await axios.get('http://localhost:8000/matches', {
         params: { userIds: JSON.stringify(matchedUserIds) },
-      });
-      setMatchedProfiles(response.data);
+      })
+      setMatchedProfiles(response.data)
+    } 
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
   useEffect(() => {
     getMatches();
-  }, [matches]);
+  }, [matchedUserIds]);
 
   const filteredMatchedProfiles = matchedProfiles?.filter(
     (matchedProfile) =>

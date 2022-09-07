@@ -1,106 +1,251 @@
-@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700;800&display=swap");
 
-html, body {
-    margin: 0;
-    padding: 0;
-    text-align: center;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
-h2 {
-    font-style: italic;
-}
+
 
 * {
-    font-family: 'Readex Pro', sans-serif;
+  font-family: "Readex Pro", sans-serif;
 }
 
 .primary-title {
-    font-size: 90px;
-    color: rgb(255, 255, 255);
+
+    font-size: 50px;
+    color: rgb(236, 163, 29);
+    
+}
+
+.second-title{
+    font-size: 40px;
+    color: rgb(230, 155, 123);
+    transform: translateY(0.5rem);
+    
+}
+
+.title{
+    display: flex;
+    transform: translateY(1rem);
 }
 
 .primary-button {
     color: rgb(255,255,255);
     text-transform: uppercase;
     font-size: 15px;
-    background: linear-gradient(45deg, rgb(254, 48, 114), rgb(255, 89, 64));
+    background: linear-gradient(55deg, rgb(229, 133, 54), rgb(239, 205, 82));
     padding: 12px 30px;
     border-radius: 30px;
     border: none;
+    transform: translateY(-25rem);
 }
 
 .primary-button:hover {
-    background: linear-gradient(260deg, rgb(254, 48, 114), rgb(255, 89, 64));
+    background: linear-gradient(105deg, rgb(237, 190, 95), rgb(229, 133, 54));
+    cursor: pointer;
+ 
 }
 
 .secondary-button {
-    color: rgb(121, 119, 119);
-    background-color: rgb(255, 255, 255);
-    font-weight: 500;
-    font-size: 15px;
-    text-transform: uppercase;
-    padding: 12px 30px;
-    border-radius: 30px;
-    border: solid 2px rgb(121, 119, 119);
-    margin: 6px;
+  color: rgb(121, 119, 119);
+  background-color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: solid 2px rgb(121, 119, 119);
+  margin: 6px;
 }
 
 .secondary-button:hover {
+
     color: rgb(48, 48, 48);
     border: solid 2px rgb(48, 48, 48);
+    cursor: pointer;
+ 
 }
-
 
 /*-------- Navbar --------*/
 
 nav {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 nav .nav-button {
-    color: rgb(254, 48, 114);
-    background-color: rgb(255, 255, 255);
-    font-size: 20px;
-    padding: 10px 20px;
-    border-radius: 10px;
+
+    color: rgb(255,255,255);
+    background: linear-gradient(55deg, rgb(229, 133, 54), rgb(239, 205, 82));
+    font-size: 15px;
+    height: 50px;
+    text-transform: uppercase;
+    padding: 10px 25px;
+    border-radius: 30px;
     border: none;
-    margin: 10px;
+    margin: 50px;
+    transform: translateY(3.5rem);
+}
+
+nav .nav-button:hover{
+    cursor: pointer;
+    background: linear-gradient(45deg, rgb(239, 205, 82), rgb(229, 133, 54));
 }
 
 nav .nav-button:disabled {
     background-color: rgb(181, 180, 180);
-    color: rgb(189, 42, 90);
+    color: rgb(242, 172, 8);
 }
 
 nav .logo-container {
+    display: flex;
     width: 170px;
     margin: 15px;
 }
 
 nav .logo-container .logo {
-    width: 100%;
+    height: 500px;
+    width: auto;
+    transform: translateY(-3rem);
+    
+   
+}
+
+.dashboard-nav{
+    display: flex;
+    margin: auto;
+    min-width: 400px;
+    /* max-width: 600px; */
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background: linear-gradient(
+        to bottom,
+        rgba(238, 169, 9, 0.89) 0%,
+        rgba(221, 132, 23, 0.3) 100%
+);
+
+   border-radius: 10px;
+   z-index: 20;
+   position: absolute;
+    
+
+}
+
+.nav-link{
+ color: white;
+ font-size: 15px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ padding: 30px;
+ text-transform: uppercase;
+}
+
+.nav-link:hover{
+    color: rgb(222, 146, 3);
+    text-decoration: underline;
+    background: rgba(242, 223, 190, 0.3);
+    border-radius: 20px;
+
 }
 
 /*-------- Home page --------*/
 .overlay {
+
     width: 100vw;
     height: 100vh;
     position: fixed;
     background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.65) 0%,
+            to top,
+            rgba(244, 230, 183, 0.25) 0%,
             rgba(0, 0, 0, 0) 100%
-    ), url('images/6e9794bcedeecf5a8f8f41338a2a7345.webp')
+    );
+    
+    overflow: scroll;
+
 }
 
 .home {
-    margin-top: 30vh;
+  margin-top: 30vh;
+}
+
+
+
+
+/*-------- Carousel ---------*/
+
+.carousel {
+    width: 60%;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    transform: translateY(-15rem);
+    
+}
+
+.carouselInner {
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    border-radius: 30px;
+}
+
+.carouselInner .left {
+    flex: 4%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    color: rgba(5, 5, 5, 0.338);
+    cursor: pointer;
+}
+
+.carouselInner .center {
+    flex: 92%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    text-align: justify;
+    text-align-last: center;
+}
+
+h1 {
+    font-size: 3rem;
+    color: rgb(244, 171, 12);
+}
+
+p {
+    font-size: 1rem;
+}
+
+h1, p {
+    background-color: rgb(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 9px;
+}
+
+.carouselInner .right {
+    flex: 4%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    color: rgba(5, 5, 5, 0.338);
+    cursor: pointer;
+
 }
 
 /*-------- Auth Modal --------*/
 .auth-modal {
+
     position: absolute;
     left: 0;
     right: 0;
@@ -108,109 +253,189 @@ nav .logo-container .logo {
     margin-left: auto;
     margin-right: auto;
     max-width: 360px;
-    height: 600px;
+    height: 700px;
     background-color: rgb(255, 255, 255);
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 40px;
+    background: rgba(222, 221, 220, 0.75);
+    
+}
+
+.auth-modal .form-title{
+    color: rgb(196, 118, 8);
+}
+
+.auth-modal .form-label{
+    color: rgb(196, 118, 8);
+    padding: 5px;
+
 }
 
 .auth-modal .close-icon {
-    float: right;
+  float: right;
+}
+
+.auth-modal .close-icon:hover{
+cursor: pointer;
+/* background: rgb(229, 133, 54); */
+border-radius: 60px;
 }
 
 .auth-modal form {
+
     display: flex;
     flex-direction: column;
+    
 }
 
 .auth-modal input[type=password],
-.auth-modal input[type=email] {
-    padding: 8px;
-    margin: 8px;
+.auth-modal input[type=email],
+.auth-modal input[type=text] {
+    padding: 10px;
+    margin: 10px;
     font-size: 17px;
+    border-radius: 15px;
+}
+
+.auth-modal button{
+    border-radius: 30px;
+    background: rgb(236, 166, 46);
+    padding: 20px;
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+
+.auth-modal button:hover{
+    background: rgb(222, 146, 3);
+    cursor: pointer;
+
 }
 
 /*-------- OnBoarding Page --------*/
 .onboarding {
+
     border-top: solid 1px rgb(213, 213, 213);
+    transform: translateY(-16rem);
+
 }
 
 .onboarding form {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .onboarding form section {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    width: 35%;
-    text-align: start;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 35%;
+  text-align: start;
+}
+
+.onboarding .form-title{
+    color: rgb(238, 179, 95)
 }
 
 .onboarding form input {
-    padding: 15px 30px;
-    margin: 10px 0;
-    font-size: 15px;
-    border: solid 2px rgb(219, 219, 219);
-    border-radius: 10px;
+  padding: 15px 30px;
+  margin: 10px 0;
+  font-size: 15px;
+  border: solid 2px rgb(219, 219, 219);
+  border-radius: 10px;
 }
 
 .onboarding form label {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .onboarding form .multiple-input-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .onboarding form input::-webkit-outer-spin-button,
 .onboarding form input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .onboarding form .multiple-input-container input {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .onboarding form .multiple-input-container label {
-    padding: 10px;
-    border: solid 2px rgb(144, 144, 144);
-    border-radius: 10px;
-    transition: all 0.3s;
-    margin-right: 10px;
+  padding: 10px;
+  border: solid 2px rgb(144, 144, 144);
+  border-radius: 10px;
+  transition: all 0.3s;
+  margin-right: 10px;
 }
 
-.onboarding form input[type=radio] {
-    display: none;
+.onboarding form input[type="radio"] {
+  display: none;
 }
 
-.onboarding form input[type=number] {
-    width: 10%;
+.onboarding form input[type="number"] {
+  width: 10%;
 }
+
 
 .onboarding form input[type=radio]:checked + label {
-    border: solid 2px rgb(221, 39, 22);
+    border: solid 2px rgb(236, 166, 46);
 }
 
 .onboarding form input[type=submit]:hover {
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(206, 135, 12);
+    cursor: pointer;
 }
 
 .onboarding form input[type=submit]:active {
-    background-color: rgb(226, 115, 115);
+    background-color: rgb(236, 166, 46);
+}
+
+.onboarding .submit-button{
+    color: white;
+    background: rgb(236, 166, 46);
+
 }
 
 .onboarding form .photo-container img {
-    width: 100%
+  width: 100%;
+}
+
+.onboarding .profession-select{
+    padding: 15px;
+    border-radius: 10px;
+    border: solid 2px rgb(219, 219, 219);
+}
+
+.onboarding .about{
+    border-radius: 10px;
+    padding: 10px;
+    border: solid 2px rgb(219, 219, 219);
+}
+
+.onboarding .picture-upload{
+    padding: 10px;
+    background:rgb(236, 166, 46) ;
+    border-radius: 10px;
+    border: solid 1px rgb(219, 219, 219);
+    color: white;
+    font-size: 14px;
+}
+
+.onboarding .picture-upload:hover{
+    background:rgb(206, 135, 12) ;
+    cursor: pointer;
 }
 
 /*-------- Dashboard  --------*/
 .dashboard {
+
     display: flex;
     justify-content: space-between;
+    
 }
 
 .dashboard .swipe-container {
@@ -220,144 +445,235 @@ nav .logo-container .logo {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    transform: translateY(8rem);
+
 }
 
 .swipe {
-    position: absolute;
+  position: absolute;
 }
 
 .dashboard .card-container {
-    width: 400px;
-    height: 650px;
+  width: 400px;
+  height: 650px;
 }
 
 .card {
-    width: 400px;
-    height: 650px;
-    border-radius: 30px;
-    background-size: cover;
-    background-position: center;
+  width: 400px;
+  height: 650px;
+  border-radius: 30px;
+  background-size: cover;
+  background-position: center;
 }
 
 .card h3 {
-    margin-top: 0;
+
+    margin-top: 10px;
+    color: white;
+    background: rgb(144, 144, 144,0.75);
+    width: 300px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(3.2rem)
+    translateY(1rem);
 }
 
 .dashboard .swipe-info {
     position: absolute;
     bottom: 0;
     padding: 10px;
+    transform: translateY(12rem);
+    color: rgb(222, 146, 3);
+
 }
+
+.fav-button {
+  transform: translateY(-2rem);
+}
+
+.tinder-layout{
+    width: 400px;
+    height: 670px;
+    flex-flow: column wrap;
+    background: rgb(230, 163, 61);
+    z-index: 1;
+    position: absolute;
+    
+}
+
+.tinder-layout .card-content-about {
+   border-radius: 10px; 
+   width: 300px !important ;
+   align-items: center;
+   justify-content: center;
+   transform: translateX(2rem);
+   height: 170px !important;
+}
+
+.tinder-layout .card-content-interest{
+    transform: translateX(2rem);
+    height: 120px;
+    width: 300px !important ;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    
+} 
+
+.tinder-layout .card-content-links{
+    transform: translateX(2rem);
+    height: 100px;
+    width: 300px !important ;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+} 
+
+.swipe-icons{
+    position: fixed;
+    transform: translateY(28rem);
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    
+
+}
+
+.swipe-icons .MuiIconButton-root{
+    background: rgba(240, 238, 238, 0.456);
+    box-shadow: 0px 10px 53px 0 px black;
+}
+
+.swipe-icons .swipeButton_close{
+    color: rgb(249, 2, 2);
+    padding: 2vw !important;
+}
+
+ .swipe-container .swipeButton-favorite{
+    color: rgb(224, 2, 249);
+    padding: 2vw !important;
+    
+}
+ 
+
+.swipe-icons .swipeButton-like{
+    color: rgb(249, 134, 2);
+    padding: 2vw !important;
+}
+
+.show-card-content{
+    color: rgb(249, 134, 2) !important;
+    padding: 1vw !important;
+    transform: translateY(4rem);
+    
+}
+
+.tinder-layout .hide-card-content{
+    padding: 1vw !important;
+    transform: translateX(-9.5rem);
+    color: white;
+    
+
+}
+
+
 
 /*-------- Chat Container --------*/
 .chat-container {
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
     width: 30%;
     text-align: left;
     z-index: 1;
+    transform: translateY(9rem);
+    margin:auto;
+
 }
 
 .chat-container .chat-container-header {
-    background: linear-gradient(45deg, rgb(254, 48, 114), rgb(255, 89, 64));
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background: linear-gradient(
+    45deg,
+    rgba(241, 156, 11, 0.921),
+    rgba(246, 181, 51, 0.789)
+  );
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .chat-container .option {
-    border: none;
-    background-color: rgb(255, 255, 255);
-    border-bottom: solid 4px rgb(243, 33, 33);
-    font-size: 20px;
-    margin: 2px;
-    padding: 10px;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  border-bottom: solid 4px rgba(241, 156, 11, 0.921);
+  font-size: 20px;
+  margin: 2px;
+  padding: 10px;
 }
 
 .chat-container .option:disabled {
-    border-bottom: solid 4px rgb(187, 187, 187);
+  border-bottom: solid 4px rgb(187, 187, 187);
 }
 
 .chat-container .profile,
 .chat-container .log-out-icon {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: rgb(255, 255, 255);
 }
 
 .img-container {
-    height: 30px;
-    width: 30px;
-    border-radius: 15px;
-    overflow: hidden;
-    margin: 10px;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 10px;
 }
 
 .img-container img {
-    width: 100%;
+  width: 100%;
 }
 
 /*-------- Chat Display --------*/
 .chat-display,
 .matches-display {
-    padding: 20px;
-    height: 60vh;
-    overflow-y: auto;
+  padding: 20px;
+  height: 65vh;
+  overflow-y: auto;
+}
+
+.message-box{
+  background: linear-gradient(
+    45deg,
+    rgba(241, 156, 11, 0.921),
+    rgba(246, 181, 51, 0.789)
+  );
+padding: 8px 10px;
+border-radius: 4px;
+max-width: 30%;
+margin: 0 50% 0 0;
+color: #f7f3f3;
+font-size: 14px;
 }
 
 /*-------- Chat Input --------*/
 .chat-input {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+  margin-left: 15%;
+  width: 70%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*-------- Fav Users --------*/
+.fav-container {
+  display: flex;
+  flex-flow: row wrap;
+}

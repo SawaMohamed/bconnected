@@ -4,6 +4,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   text-align: center;
 }
 
@@ -35,7 +36,7 @@ body {
   padding: 12px 30px;
   border-radius: 30px;
   border: none;
-  transform: translateY(-25rem);
+  transform: translate(19rem, -21rem);
 }
 
 .primary-button:hover {
@@ -69,6 +70,11 @@ nav {
   justify-content: space-between;
 }
 
+
+.logo-nav .logo-container .logo {
+  z-index: -100;
+}
+
 nav .nav-button {
   color: rgb(255, 255, 255);
   background: linear-gradient(55deg, rgb(229, 133, 54), rgb(239, 205, 82));
@@ -99,7 +105,11 @@ nav .logo-container {
 }
 
 nav .logo-container .logo {
-  height: 500px;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  height: 30rem;
   width: auto;
   transform: translateY(-3rem);
 }
@@ -120,7 +130,6 @@ nav .logo-container .logo {
 
   border-radius: 10px;
   z-index: 20;
-  position: absolute;
 }
 
 .nav-link {
@@ -289,7 +298,7 @@ p {
 /*-------- OnBoarding Page --------*/
 .onboarding {
   border-top: solid 1px rgb(213, 213, 213);
-  transform: translateY(-16rem);
+  /* transform: translateY(-16rem); */
 }
 
 .onboarding form {
@@ -403,17 +412,25 @@ p {
 /*-------- Dashboard  --------*/
 .dashboard {
   display: flex;
-  justify-content: space-between;
+  max-height: 100vh;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: flex-start;
+  justify-items: flex-start;
+  background: linear-gradient(
+    to top,
+    rgba(244, 230, 183, 0.25) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 .dashboard .swipe-container {
   width: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  transform: translateY(8rem);
+  justify-items: flex-start;
+  justify-content: flex-start;
 }
 
 .swipe {
@@ -422,15 +439,15 @@ p {
 
 .dashboard .card-container {
   width: 400px;
-  height: 650px;
 }
 
 .card {
   width: 400px;
-  height: 650px;
+  height: 40rem;
   border-radius: 30px;
   background-size: cover;
   background-position: center;
+  box-shadow: 5px 7px 7px rgb(144, 144, 144);
 }
 
 .card h3 {
@@ -458,12 +475,14 @@ p {
 }
 
 .tinder-layout {
+  margin-top: 7rem;
   width: 400px;
   height: 670px;
   flex-flow: column wrap;
   background: rgb(230, 163, 61);
   z-index: 1;
   position: absolute;
+  border-radius: 20px;
 }
 
 .tinder-layout .card-content-about {
@@ -471,26 +490,42 @@ p {
   width: 300px !important ;
   align-items: center;
   justify-content: center;
-  transform: translateX(2rem);
+  transform: translateX(3rem);
   height: 170px !important;
+  color: black;
+  background: rgba(237, 230, 220, 0.37);
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
 .tinder-layout .card-content-interest {
-  transform: translateX(2rem);
+  transform: translateX(3rem);
   height: 120px;
   width: 300px !important ;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  color: black;
+  background: rgba(235, 225, 212, 0.37);
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
 .tinder-layout .card-content-links {
-  transform: translateX(2rem);
-  height: 100px;
+  transform: translateX(3rem);
+  height: 120px;
   width: 300px !important ;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  color: black;
+  background: rgba(235, 225, 212, 0.37);
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.tinder-layout .hide-card-content:hover {
+  background: rgb(213, 213, 213, 0);
 }
 
 .swipe-icons {
@@ -523,7 +558,7 @@ p {
 .show-card-content {
   color: rgb(249, 134, 2) !important;
   padding: 1vw !important;
-  transform: translateY(4rem);
+  transform: translateY(10.4rem);
 }
 
 .tinder-layout .hide-card-content {
@@ -607,7 +642,7 @@ p {
   justify-items: end;
 }
 
-.chat-display .chat-my-message > p:nth-child(2){
+.chat-display .chat-my-message > p:nth-child(2) {
   text-align: end;
   margin: 0 !important;
   background: rgb(198, 193, 29);
@@ -640,6 +675,67 @@ p {
 
 /*-------- Fav Users --------*/
 .fav-container {
+  margin-top: 3rem;
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+}
+
+.fav-users-cards {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 35rem;
+  width: 20rem;
+  border-radius: 15px;
+  box-shadow: 5px 7px 7px rgb(144, 144, 144);
+  background: rgb(238, 194, 133);
+  overflow-wrap: break-word;
+}
+
+.fav-users-cards .fav-info {
+  margin: 1rem auto auto 1rem;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.fav-info .fav-card-img {
+  margin-bottom: 1rem;
+  background-size: cover;
+  background-position: center;
+  border-top: 1rem !important;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+}
+
+.fav-info p {
+  margin: 5px !important;
+  padding: 9px !important;
+}
+
+.fav-users-cards .fav-buttons {
+  position: absolute;
+  bottom: -6rem;
+}
+
+.fav-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.logout-btn {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transform: translateX(2rem);
 }

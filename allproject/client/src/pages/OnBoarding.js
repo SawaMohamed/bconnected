@@ -130,8 +130,6 @@ const OnBoarding = () => {
 
   return (
     <>
-      <Nav minimal={true} setShowModal={() => {}} showModal={false} />
-
       <div className='onboarding'>
         <h2 className='form-title'>Personal details</h2>
 

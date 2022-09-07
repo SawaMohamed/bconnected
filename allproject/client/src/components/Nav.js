@@ -9,7 +9,7 @@ const Nav = ({ authToken, setShowModal, showModal, setIsSignUp }) => {
   }
 
   return (
-    <nav>
+    <nav className='logo-nav'>
       <div className='logo-container'>
         <img className='logo' src={Logo} alt='logo' />
         <div className='title'>

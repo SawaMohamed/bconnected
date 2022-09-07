@@ -6,8 +6,13 @@ const Logout = () => {
 
   const onClick = () => {
     navigate('/')
+    window.location.reload()
   }
-  return <button onClick={onClick}>Logout</button>
+  return (
+    <button className='logout-btn' onClick={onClick}>
+      Logout
+    </button>
+  )
 }
 
 export default Logout

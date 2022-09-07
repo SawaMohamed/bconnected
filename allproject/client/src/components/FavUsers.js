@@ -30,7 +30,7 @@ const FavUsers = () => {
       console.log(error.message)
     }
   }
-  
+
   // @desc    get my fav users data according to my favUsers
   const getFav = async () => {
     try {
@@ -91,19 +91,44 @@ const FavUsers = () => {
     getFav()
   }, [myFavIds])
 
+  console.log(fav && fav[0])
+
   return (
     <div className='fav-container'>
       {fav?.map(i => (
         <div className='fav-users-cards' key={i?.user_id}>
-          <div
-            style={{ backgroundImage: 'url(' + i?.url + ')' }}
-            className='card'
-          >
-            <h3>{i?.first_name}</h3>
-            {i?.show_dob && <p>{i.dob}</p>}
+          <div className='fav-info'>
+            <div
+              style={{ backgroundImage: 'url(' + i?.url + ')' }}
+              className='fav-card-img'
+            ></div>
+            <p>
+              Name: {i?.first_name} {i?.last_name}
+            </p>
+            <p>Profession: {i?.profession}</p>
+            <p>About me: {i?.about}</p>
+            <p>Interested in : {i?.interest}</p>
+            <p className='fav-links'>
+              {i?.link_linkedin && (
+                <a target='#' href={i?.link_linkedin}>
+                  My linkedin
+                </a>
+              )}
+              {i?.link_github && (
+                <a target='#' href={i?.link_github}>
+                  My github
+                </a>
+              )}
+              {i?.link_portfolio && (
+                <a target='#' href={i?.link_portfolio}>
+                  My portfolio
+                </a>
+              )}
+            </p>
+            {i?.show_dob && <p>Date of Birth: {i.dob}</p>}
           </div>
 
-          <div className='swipe-icons'>
+          <div className='swipe-icons fav-buttons'>
             <IconButton
               className='swipeButton_close'
               onClick={() => removeUser(i)}
